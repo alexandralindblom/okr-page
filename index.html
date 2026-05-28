@@ -2,1927 +2,455 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>All Hands — VANBRUUN</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VANBRUUN — Q3 2026 OKR: AI as a Way of Working</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+:root{--gold:#B8986A;--gold-light:#D4B88A;--black:#0A0A0A;--off-white:#F8F5F0;--warm-grey:#E8E2D8;--text-muted:#8A8278;--c1:#C9B08A;--c2:#9B8E7A;--c3:#7A6E60;--c4:#5C5248;--green:#4A6B4A;--red:#7A3A3A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--off-white);font-family:'Montserrat',sans-serif;font-weight:300;color:var(--black)}
 
-:root {
-  --bg:       #FAFAF8;
-  --bg2:      #F4F2EE;
-  --bg3:      #EDEAE4;
-  --text:     #4E3227;
-  --text2:    #4A3F35;
-  --text3:    #8A7A6A;
-  --bdr:      rgba(26,20,16,0.10);
-  --bdr2:     rgba(26,20,16,0.20);
-  --accent:   #4E3227;
-  --accent2:  #213629;
-  --amber:    #B87A10;
-  --green:    #3d7a1a;
-  --red:      #C0392B;
-  --gtc:      #2d6b0f;
-  --rtc:      #C0392B;
-  --atc:      #B87A10;
-  --rad:      6px;
-  --rad-lg:   10px;
-  --c-show:   #4E3227;
-}
+/* ACTION BANNER */
+.action-banner{background:var(--black);padding:28px 64px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.action-item{background:rgba(255,255,255,0.06);border:1px solid rgba(184,152,106,0.25);padding:20px 22px}
+.action-num{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.action-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:white;margin-bottom:8px}
+.action-desc{font-size:11.5px;color:var(--text-muted);line-height:1.55;margin-bottom:14px}
+.action-btn{display:inline-block;text-decoration:none;background:var(--gold);color:var(--black);font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;padding:8px 16px}
+.action-btn:hover{background:var(--gold-light)}
+.action-btn.outline{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.action-btn.outline:hover{background:rgba(184,152,106,0.1)}
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  padding: 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; }
+/* EMAIL */
+.email-intro{background:white;border-bottom:3px solid var(--gold);padding:48px 64px}
+.email-meta{display:flex;gap:32px;margin-bottom:28px;flex-wrap:wrap}
+.email-meta-item{font-size:11px;color:var(--text-muted);letter-spacing:0.08em}
+.email-meta-item span{color:var(--black);font-weight:500}
+.email-body{font-size:14px;line-height:1.85;color:var(--black);max-width:720px}
+.email-body p{margin-bottom:14px}
+.email-body strong{font-weight:600}
+.email-body ul{padding-left:20px;margin:10px 0 14px}
+.email-body ul li{margin-bottom:5px}
+.email-hl{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin:22px 0 8px}
+.email-sig{margin-top:28px;padding-top:20px;border-top:1px solid var(--warm-grey);font-size:12px;color:var(--text-muted)}
+.email-note{margin-top:20px;padding:14px 18px;background:var(--off-white);border-left:2px solid var(--gold);font-size:11.5px;color:var(--text-muted);line-height:1.6}
+.email-note strong{color:var(--black)}
 
 /* HEADER */
-.hdr {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 32px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--text);
-}
-h1 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--text);
-}
-.hdr-sub { font-size: 12px; color: var(--text3); margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
-.hdr-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-
-.btn {
-  background: transparent;
-  border: 1px solid var(--bdr2);
-  border-radius: 4px;
-  padding: 6px 14px;
-  font-size: 12px;
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text2);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all .15s;
-  letter-spacing: 0.02em;
-}
-.btn:hover { background: var(--bg2); border-color: var(--bdr2); }
-.btn.primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-  font-weight: 500;
-}
-.btn.primary:hover { opacity: .88; }
-.mtag {
-  font-size: 11px;
-  color: var(--text3);
-  background: var(--bg2);
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--bdr);
-  letter-spacing: 0.03em;
-}
-
-/* STICKY NAV */
-.sticky-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg);
-  border-bottom: 1px solid var(--bdr);
-  padding: 10px 0;
-  margin-bottom: 40px;
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.nav-a {
-  font-size: 11px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  color: var(--text3);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all .15s;
-  letter-spacing: 0.02em;
-}
-.nav-a:hover { color: var(--text); border-color: var(--bdr); background: var(--bg2); }
-.spin-btn {
-  margin-left: auto;
-  font-size: 11px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid var(--bdr2);
-  color: var(--text2);
-  cursor: pointer;
-  background: transparent;
-  font-family: 'DM Sans', sans-serif;
-  transition: all .15s;
-}
-.spin-btn:hover { background: var(--bg2); }
-.spinning { animation: spin .8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+.header{background:var(--black);padding:52px 64px 44px;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold) 0%,transparent 100%)}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:44px}
+.brand{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:400;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase}
+.badge{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase;border:1px solid rgba(184,152,106,0.25);padding:6px 16px}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;color:white;line-height:1.05;margin-bottom:14px}
+.header-title em{color:var(--gold-light);font-style:italic}
+.header-sub{font-size:11px;font-weight:400;letter-spacing:0.18em;color:var(--text-muted);text-transform:uppercase}
 
 /* SECTIONS */
-.sec { margin-bottom: 56px; scroll-margin-top: 60px; }
-.sec-head {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--bdr);
-}
-.sec-head h2 {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-.snum {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 11px;
-  color: var(--text3);
-  border: 1px solid var(--bdr2);
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.badge {
-  font-size: 9px;
-  padding: 2px 8px;
-  border-radius: 3px;
-  font-weight: 500;
-  margin-left: auto;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.badge-s { background: rgba(33,54,41,.08); color: var(--accent2); border: 1px solid rgba(33,54,41,.15); }
-.badge-a { background: rgba(78,50,39,.06); color: var(--accent); border: 1px solid rgba(78,50,39,.15); }
+.section{padding:56px 64px;border-bottom:1px solid var(--warm-grey)}
+.section-label{font-size:10px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;margin-bottom:36px;line-height:1.2}
 
-/* CEO SECTION — editorial style */
-.ceo-card {
-  padding: 28px 0;
-  border-bottom: 1px solid var(--bdr);
-  margin-bottom: 20px;
-}
-.ceo-q {
-  font-family: 'Libre Baskerville', serif;
-  font-size: 19px;
-  line-height: 1.7;
-  color: var(--text);
-  }
-.ceo-meta { font-size: 11px; color: var(--text3); margin-top: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+/* INTRO */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;padding:56px 64px;border-bottom:1px solid var(--warm-grey)}
+.intro-text{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:300;line-height:1.65}
+.intro-text strong{font-weight:500;color:#5C4A2A}
+.meta-stack{display:flex;flex-direction:column;gap:2px}
+.meta-item{padding:18px 22px;background:white;border-left:2px solid var(--gold)}
+.meta-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.meta-value{font-size:13px;font-weight:400;line-height:1.5}
 
-.tcard {
-  background: var(--bg2);
-  border: 1px solid var(--bdr);
-  border-radius: var(--rad-lg);
-  padding: 20px 24px;
-  margin-bottom: 12px;
-}
-.tc-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 16px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.tf { margin-bottom: 16px; }
-.tf:last-child { margin-bottom: 0; }
-.tf-lbl {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 5px;
-}
-.tf-val { font-size: 14px; color: var(--text); line-height: 1.65; white-space: pre-wrap; }
-.tf-val.empty { color: var(--text3); font-size: 13px; }
-.tdivider { border: none; border-top: 1px solid var(--bdr); margin: 14px 0; }
+/* TIMELINE */
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.tl-item{background:white;padding:24px 20px 28px;position:relative}
+.tl-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.tl-item:nth-child(1)::after{background:#C9B08A}
+.tl-item:nth-child(2)::after{background:#B09870}
+.tl-item:nth-child(3)::after{background:#9B8E7A}
+.tl-item:nth-child(4)::after{background:#7A6E60}
+.tl-item:nth-child(5)::after{background:#5C5248}
+.tl-date{font-size:10px;font-weight:600;letter-spacing:0.12em;color:var(--gold);margin-bottom:10px}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:8px;line-height:1.2}
+.tl-desc{font-size:11.5px;color:var(--text-muted);line-height:1.55}
 
-/* PACE CARDS */
-.p3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.pc {
-  background: var(--bg);
-  border: 1px solid var(--bdr);
-  border-radius: var(--rad-lg);
-  padding: 18px 20px;
-  position: relative;
-}
-.pc::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent);
-  border-radius: var(--rad-lg) var(--rad-lg) 0 0;
-  opacity: 0.5;
-}
-.pl { font-size: 11px; color: var(--text3); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
-.pv { font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
-.pyoy { font-size: 13px; font-weight: 500; margin-top: 2px; }
-.pyoy.g { color: var(--gtc); }
-.pyoy.r { color: var(--rtc); }
-.pyoy.y { color: var(--atc); }
-.pbar-wrap { width: 100%; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; margin: 10px 0 5px; }
-.pbar { height: 4px; border-radius: 2px; transition: width .6s ease; }
-.pbar.g { background: var(--green); }
-.pbar.y { background: var(--amber); }
-.pbar.r { background: var(--red); }
-.psub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+/* PHASES */
+.phases{display:flex;flex-direction:column;gap:3px}
+.phase{display:grid;grid-template-columns:220px 1fr 1fr;background:white;overflow:hidden;transition:transform 0.15s ease}
+.phase:hover{transform:translateX(3px)}
+.phase-left{padding:30px 26px;display:flex;flex-direction:column;justify-content:flex-start;gap:4px}
+.phase:nth-child(1) .phase-left{background:var(--c1)}
+.phase:nth-child(2) .phase-left{background:var(--c2)}
+.phase:nth-child(3) .phase-left{background:var(--c3)}
+.phase:nth-child(4) .phase-left{background:var(--c4)}
+.phase-week{font-size:10px;font-weight:600;letter-spacing:0.2em;color:rgba(255,255,255,0.65);text-transform:uppercase}
+.phase-dates{font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.05em;margin-bottom:6px}
+.phase-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:white;line-height:1.2;margin-bottom:12px}
+.phase-vid-label{font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px;margin-top:auto}
+.phase-vid-link{display:flex;align-items:flex-start;gap:6px;text-decoration:none;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:6px 9px;margin-bottom:4px;transition:background 0.15s}
+.phase-vid-link:hover{background:rgba(255,255,255,0.2)}
+.phase-vid-link span{font-size:10.5px;color:white;line-height:1.35;opacity:0.85}
+.play-icon{font-size:10px;flex-shrink:0;margin-top:2px}
+.phase-mid{padding:30px 28px;border-right:1px solid var(--warm-grey)}
+.phase-right{padding:30px 28px}
+.phase-topic{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.phase-list{list-style:none;padding:0}
+.phase-list li{font-size:12.5px;line-height:1.65;padding:3px 0 3px 16px;position:relative;border-bottom:1px solid rgba(0,0,0,0.04)}
+.phase-list li:last-child{border-bottom:none}
+.phase-list li::before{content:'—';position:absolute;left:0;color:var(--gold);font-size:10px;top:5px}
+.time-badge{display:inline-block;margin-top:14px;background:var(--off-white);border:1px solid var(--warm-grey);padding:5px 12px;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted)}
 
-/* MARKET TABLE */
-.tbl-label { font-size: 11px; color: var(--text2); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.02em; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
-th {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text3);
-  text-align: left;
-  padding: 8px 10px;
-  border-bottom: 2px solid var(--text);
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-th.r { text-align: right; }
-td { padding: 10px 10px; border-bottom: 1px solid var(--bdr); color: var(--text); vertical-align: middle; }
-tr:last-child td { border-bottom: none; }
-td.r { text-align: right; font-variant-numeric: tabular-nums; }
-td.g { color: var(--gtc); font-weight: 500; }
-td.r-c { color: var(--rtc); font-weight: 500; }
-td.y { color: var(--atc); font-weight: 500; }
-.tot td { background: var(--bg2); font-weight: 600; border-top: 1px solid var(--bdr2); }
-tr:hover td { background: var(--bg2); }
+/* TOOLS */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool{background:white;padding:30px 26px;border-top:3px solid transparent;transition:border-color 0.2s}
+.tool:hover{border-top-color:var(--gold)}
+.tool-icon{font-size:30px;margin-bottom:16px}
+.tool-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:6px}
+.tool-tag{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.tool-desc{font-size:12.5px;color:var(--text-muted);line-height:1.6;margin-bottom:16px}
+.tool-ex-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
+.tool-ex{list-style:none;padding:0}
+.tool-ex li{font-size:12px;color:#6A6460;padding:5px 0;border-bottom:1px solid var(--warm-grey);line-height:1.4}
+.tool-ex li:last-child{border-bottom:none}
 
-/* CHARTS */
-.cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-.cc {
-  background: var(--bg);
-  border: 1px solid var(--bdr);
-  border-radius: var(--rad-lg);
-  padding: 20px;
-}
-.cc.full { grid-column: 1 / -1; }
-.ctitle { font-size: 11px; font-weight: 600; color: var(--text2); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em; }
-.cwrap { position: relative; }
+/* PROJECTS */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.project-card{background:white;padding:26px 28px;display:flex;gap:20px}
+.proj-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--warm-grey);line-height:1;min-width:42px}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:5px}
+.proj-dept{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.proj-desc{font-size:12.5px;color:var(--text-muted);line-height:1.6}
 
-/* CHART SUMMARY — editorial, prominent */
-.chart-summary {
-  font-size: 13px;
-  color: var(--text2);
-  line-height: 1.7;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--bdr);
-  font-family: 'Libre Baskerville', serif;
-  }
+/* OKR */
+.okr-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.okr-box{padding:28px}
+.okr-box.do{background:#F0EDE6}
+.okr-box.dont{background:white;border:1px solid var(--warm-grey)}
+.okr-head{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px}
+.okr-box.do .okr-head{color:var(--green)}
+.okr-box.dont .okr-head{color:var(--red)}
+.okr-list{list-style:none;padding:0}
+.okr-list li{font-size:12.5px;line-height:1.6;padding:7px 0 7px 22px;position:relative;border-bottom:1px solid rgba(0,0,0,0.05)}
+.okr-list li:last-child{border-bottom:none}
+.okr-box.do .okr-list li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700;font-size:11px;top:9px}
+.okr-box.dont .okr-list li::before{content:'✕';position:absolute;left:0;color:var(--red);font-weight:700;font-size:11px;top:9px}
 
-/* LOADING */
-.load-over {
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  flex-direction: column;
-  gap: 14px;
-  transition: opacity .3s;
-}
-.load-over.hidden { opacity: 0; pointer-events: none; }
-.load-spin {
-  width: 28px;
-  height: 28px;
-  border: 2px solid var(--bdr2);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin .8s linear infinite;
-}
-.load-txt { font-size: 12px; color: var(--text3); letter-spacing: 0.04em; }
+/* FOOTER */
+.footer{background:var(--black);padding:38px 64px;display:flex;justify-content:space-between;align-items:center}
+.footer-brand{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase}
+.footer-note{font-size:11px;color:var(--text-muted)}
 
-/* OUTBOUND KPI CARDS */
-.ob-kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-
-/* MARKETING KPI CARDS */
-.mkt-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-.mkt-grid .pc::before { background: var(--accent2); }
-
-/* Q&A */
-#qaInput {
-  background: var(--bg);
-  border: 1px solid var(--bdr2);
-  border-radius: var(--rad);
-  padding: 10px 14px;
-  font-size: 13px;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  outline: none;
-  transition: border-color .15s;
-}
-#qaInput:focus { border-color: var(--accent); }
-
-/* PDF mode */
-body.pdf-mode .sticky-nav,
-body.pdf-mode .hdr-right,
-body.pdf-mode #loadOver { display: none !important; }
-
-/* Lightbox */
-#lightbox { display: none; }
-
-/* Skeleton */
-.sk {
-  display: inline-block;
-  background: var(--bg3);
-  border-radius: 3px;
-  animation: pulse 1.4s ease infinite;
-}
-@keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
-
-/* Drag over */
-.dragover { background: var(--bg3) !important; }
-
-/* Divider between sections */
-.sec-divider {
-  border: none;
-  border-top: 1px solid var(--bdr);
-  margin: 48px 0;
-}
-
-@media(max-width: 640px) {
-  .wrap { padding: 24px 16px 60px; }
-  .p3, .cgrid, .mkt-grid { grid-template-columns: 1fr; }
-  .cc.full { grid-column: 1; }
-  .ob-kpi { grid-template-columns: 1fr; }
+@media(max-width:900px){
+  .action-banner,.email-intro,.header,.section,.intro-grid{padding:32px 24px}
+  .action-banner{grid-template-columns:1fr}
+  .header-title{font-size:38px}
+  .intro-grid{grid-template-columns:1fr;gap:32px}
+  .timeline{grid-template-columns:1fr 1fr}
+  .phase{grid-template-columns:1fr}
+  .tools,.projects,.okr-grid{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:12px;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="load-over" id="loadOver">
-  <div class="load-spin"></div>
-  <div class="load-txt" id="loadTxt">Fetching live data…</div>
+<!-- ACTION BANNER -->
+<div class="action-banner">
+  <div class="action-item">
+    <div class="action-num">Step 1 — Everyone</div>
+    <div class="action-title">Copy the Asana Project</div>
+    <div class="action-desc">Open the project, copy it to yourself, and assign all tasks to yourself. Your personal checklist for the entire Q3 journey.</div>
+    <a class="action-btn" href="https://app.asana.com/1/392173809291824/project/1215114378204984" target="_blank">Open Asana Project →</a>
+  </div>
+  <div class="action-item">
+    <div class="action-num">Step 2 — Everyone</div>
+    <div class="action-title">Import Calendar Events</div>
+    <div class="action-desc">Download the .ics file and import it to Google Calendar. All onboarding weeks, deadlines and milestones land in your calendar at once.</div>
+    <a class="action-btn outline" href="vanbruun_q3_okr_2026.ics" download>Download Calendar File →</a>
+  </div>
+  <div class="action-item">
+    <div class="action-num">Step 3 — June 1</div>
+    <div class="action-title">Start Week 1</div>
+    <div class="action-desc">From June 1, follow the onboarding plan below. One tool per week, 15 minutes of video, one exercise. You're done before Q3 starts.</div>
+    <a class="action-btn outline" href="#onboarding" onclick="document.querySelector('.phases').scrollIntoView({behavior:'smooth'});return false;">View Onboarding Plan →</a>
+  </div>
 </div>
 
-<div class="wrap">
+<!-- EMAIL INTRO -->
+<div class="email-intro">
+  <div class="email-meta">
+    <div class="email-meta-item">To: <span>[Paste all staff emails]</span></div>
+    <div class="email-meta-item">From: <span>Victor Halvarsson — victor@vanbruun.com</span></div>
+    <div class="email-meta-item">Subject: <span>Q3 2026 — AI as a Way of Working: Here's What You Need to Do</span></div>
+    <div class="email-meta-item">Date: <span>June 1, 2026</span></div>
+  </div>
+  <div class="email-body">
+    <p>Hi everyone,</p>
+    <p>Q2 is wrapping up and I'm proud of what we've built together. Now it's time to set the tone for Q3 — and this quarter is going to be different from any we've done before.</p>
+    <p><strong>The theme for Q3 is AI.</strong></p>
+    <p>Every single person at VANBRUUN — regardless of role — will build their own automated project this quarter. You choose what problem you want to solve. It can be a tool that handles customer emails, something that monitors competitor pricing, an agent that updates your pipeline every morning, or a script that sorts samples. You don't need to know how to code. Claude writes the code for you.</p>
+    <p>The only thing we ask is that you try.</p>
+
+    <div class="email-hl">Three things to do right now</div>
+    <ul>
+      <li><strong>1. Copy the Asana project to yourself</strong> — open the link below, copy it, and assign all tasks to yourself. This is your personal checklist for the full Q3 journey.</li>
+      <li><strong>2. Import the calendar file</strong> — download the .ics file attached to this email and import it into Google Calendar. All dates land in your calendar at once.</li>
+      <li><strong>3. Start Week 1 on June 1</strong> — watch the Anthropic Academy intro video (15 min) and complete the first exercise. Everything is in your Asana project.</li>
+    </ul>
+
+    <div class="email-hl">How onboarding works</div>
+    <p>Four weeks in June. One tool per week. Max 15 minutes of watching per week — official Anthropic Academy videos, free, no sign-up needed. Each week ends with one short practical exercise.</p>
+    <ul>
+      <li><strong>Week 1 (June 1–7):</strong> What is Claude?</li>
+      <li><strong>Week 2 (June 8–14):</strong> Claude Cowork — automate without code</li>
+      <li><strong>Week 3 (June 15–21):</strong> Claude Agents — connect HubSpot, Asana, Gmail</li>
+      <li><strong>Week 4 (June 22–28):</strong> Claude Code — let AI write scripts for you</li>
+    </ul>
+
+    <div class="email-hl">Key dates</div>
+    <ul>
+      <li><strong>June 1:</strong> Onboarding starts — Week 1 (What is Claude?)</li>
+      <li><strong>June 25:</strong> Submit 2–3 project ideas to your manager</li>
+      <li><strong>June 28:</strong> Q3 OKR submitted</li>
+      <li><strong>August 15:</strong> MVP demo — first working version presented internally</li>
+      <li><strong>September 30:</strong> Final presentations + retrospective</li>
+    </ul>
+
+    <div class="email-hl">Links</div>
+    <ul>
+      <li>Asana project (copy this to yourself): <a href="https://app.asana.com/1/392173809291824/project/1215114378204984" style="color:#B8986A">app.asana.com → Q3 2026 Onboarding</a></li>
+      <li>Calendar file: attached to this email (.ics)</li>
+    </ul>
+
+    <p>The people who understand these tools today will lead their roles tomorrow. I'm convinced this quarter will change how we work — permanently.</p>
+    <p>Start on June 1. Everything you need is in the Asana project.</p>
+
+    <div class="email-sig">
+      Victor Halvarsson<br>
+      CEO &amp; Founder · VANBRUUN<br>
+      +46 760 149 200
+    </div>
+
+    <div class="email-note">
+      <strong>Note for managers:</strong> You have a separate task in the Asana project with your specific responsibilities — scheduling 1:1s with each direct report, reviewing project ideas by June 25, and confirming each person's project before Q3 starts. Please read it carefully.
+    </div>
+  </div>
+</div>
 
 <!-- HEADER -->
-<div class="hdr">
-  <div>
-    <h1>All Hands Report</h1>
-    <div class="hdr-sub" id="dateLbl"></div>
+<div class="header">
+  <div class="header-top">
+    <div class="brand">Vanbruun</div>
+    <div class="badge">Q3 2026 · OKR Initiative</div>
   </div>
-  <div class="hdr-right">
-    <div class="mtag" id="weekLbl"></div>
-    <a href="input.html" class="btn">✏️ Input tool</a>
-    
-    <button class="btn primary" onclick="loadAll()">↻ Refresh</button>
-    <button class="btn" id="savePdfBtn" onclick="saveWeekPDF()" style="background:var(--bg2);border-color:var(--bdr2)">⬇ Save this week</button>
+  <div class="header-title">AI as a<br><em>Way of Working</em></div>
+  <div class="header-sub">Company-Wide Onboarding &amp; Project Plan · June – September 2026</div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-grid">
+  <div class="intro-text">
+    Starting <strong>June 1</strong>, every person at VANBRUUN onboards on Claude tools — together, one week at a time. By July 1, when Q3 officially begins, everyone is ready to build.<br><br>
+    Each week: <strong>15 minutes of official Anthropic video</strong> + one hands-on exercise.
+  </div>
+  <div class="meta-stack">
+    <div class="meta-item"><div class="meta-label">Onboarding</div><div class="meta-value">June 1–28 · 4 weeks · 15 min/week</div></div>
+    <div class="meta-item"><div class="meta-label">Project Ideas Deadline</div><div class="meta-value">June 25 — submit 2–3 ideas to your manager</div></div>
+    <div class="meta-item"><div class="meta-label">Individual OKRs</div><div class="meta-value">June 28</div></div>
+    <div class="meta-item"><div class="meta-label">Build Period (Q3)</div><div class="meta-value">July 1 – September 30, 2026</div></div>
+    <div class="meta-item"><div class="meta-label">MVP Demo</div><div class="meta-value">August 15 · <a href="https://meet.google.com/wnz-rpzv-nkr" style="color:var(--gold)">meet.google.com/wnz-rpzv-nkr</a></div></div>
+    <div class="meta-item"><div class="meta-label">Final Presentations</div><div class="meta-value">September 30 · <a href="https://meet.google.com/wnz-rpzv-nkr" style="color:var(--gold)">meet.google.com/wnz-rpzv-nkr</a></div></div>
   </div>
 </div>
 
-<!-- STICKY NAV -->
-<nav class="sticky-nav">
-  <a class="nav-a" href="#sec-ceo">1 · CEO</a>
-  <a class="nav-a" href="#sec-sales">2 · Sales & KPIs</a>
-  <a class="nav-a" href="#sec-showrooms">3 · Showrooms</a>
-  <a class="nav-a" href="#sec-development">4 · Development</a>
-  <a class="nav-a" href="#sec-marketing">5 · Marketing</a>
-  <a class="nav-a" href="#sec-outbound">6 · Outbound</a>
-  <a class="nav-a" href="#sec-qa">7 · Q&A</a>
-  <button class="spin-btn" id="refreshBtn" onclick="loadAll()">↻ Refresh data</button>
-</nav>
-
-<!-- ══════════════════════════════════════
-     1 · CEO
-══════════════════════════════════════ -->
-<div class="sec" id="sec-ceo">
-  <div class="sec-head">
-    <div class="snum">1</div>
-    <h2>Management / CEO</h2>
-    
-  </div>
-  <div class="ceo-card">
-    <div class="ceo-q" id="ceoNote">—</div>
-    <div id="ceoImagesDisplay" style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px"></div>
-  </div>
-  <div class="tcard" id="ceoOrgCard" style="display:none">
-    <div class="tc-title">Organisation</div>
-    <div class="tf-val" id="ceoOrg"></div>
+<!-- TIMELINE -->
+<div class="section">
+  <div class="section-label">Timeline</div>
+  <div class="section-title">Key Milestones</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-date">June 1</div><div class="tl-title">Onboarding Starts</div><div class="tl-desc">Week 1 begins. 15 min video + first exercise.</div></div>
+    <div class="tl-item"><div class="tl-date">June 25</div><div class="tl-title">Ideas In</div><div class="tl-desc">2–3 project ideas per person, reviewed by manager.</div></div>
+    <div class="tl-item"><div class="tl-date">June 28</div><div class="tl-title">OKRs Submitted</div><div class="tl-desc">Project confirmed. Ready to build from July 1.</div></div>
+    <div class="tl-item"><div class="tl-date">August 15</div><div class="tl-title">MVP Demo</div><div class="tl-desc">First working version. Internal demo + feedback.</div></div>
+    <div class="tl-item"><div class="tl-date">September 30</div><div class="tl-title">Final &amp; Retro</div><div class="tl-desc">Final presentations. Best project celebrated.</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     2 · SALES & KPIs
-══════════════════════════════════════ -->
-<div class="sec" id="sec-sales">
-  <div class="sec-head">
-    <div class="snum">2</div>
-    <h2>Sales & KPIs</h2>
-    <span class="badge badge-s" style="margin-left:auto">Dashboard · Live</span>
-  </div>
-
-  <div class="p3">
-    <!-- MONTHLY REVENUE PACE -->
-    <div class="pc">
-      <div class="pl">Monthly pace — revenue</div>
-      <div class="pv" id="kRevPace"><span class="sk" style="width:140px;height:26px">&nbsp;</span></div>
-      <div class="pyoy" id="kRevYoy"></div>
-      <div class="psub" id="kRevSub"></div>
-    </div>
-    <!-- MONTHLY ORDERS PACE -->
-    <div class="pc">
-      <div class="pl">Monthly pace — orders</div>
-      <div class="pv" id="kOrdPace"><span class="sk" style="width:80px;height:26px">&nbsp;</span></div>
-      <div class="pyoy" id="kOrdYoy"></div>
-      <div class="psub" id="kOrdSub"></div>
-    </div>
-    <!-- TARGET % -->
-    <div class="pc">
-      <div class="pl">Month target reached</div>
-      <div class="pv" id="kTargetPct"><span class="sk" style="width:80px;height:26px">&nbsp;</span></div>
-      <div class="pbar-wrap"><div class="pbar" id="kTargetBar" style="width:0%"></div></div>
-      <div class="psub" id="kTargetSub"></div>
-    </div>
-  </div>
-
-  <!-- KPI SUMMARY -->
-  <div id="kpiSummary" style="font-size:14px;color:#4E3227;line-height:1.75;padding:14px 0 20px;border-bottom:1px solid var(--bdr);margin-bottom:24px"></div>
-
-  <!-- PACE BY MARKET -->
-  <div style="font-size:13px;font-weight:600;color:#4E3227;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;margin-top:4px;display:flex;align-items:center;gap:10px">
-    Pace by market — month-to-date
-    <span class="badge badge-s">Dashboard L–O</span>
-  </div>
-  <table>
-    <thead><tr>
-      <th>Market</th>
-      <th class="r">Pace (SEK)</th>
-      <th class="r">Orders</th>
-      <th class="r">Y/Y revenue</th>
-      <th class="r">Y/Y orders</th>
-    </tr></thead>
-    <tbody id="mktBody">
-      <tr><td colspan="5" style="color:var(--text3);text-align:center;padding:18px">
-        <span class="sk" style="width:200px;height:14px">&nbsp;</span>
-      </td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- ══════════════════════════════════════
-     3 · SHOWROOMS
-══════════════════════════════════════ -->
-<div class="sec" id="sec-showrooms">
-  <div class="sec-head">
-    <div class="snum">3</div>
-    <h2>Showrooms</h2>
-    <span class="badge badge-s" style="margin-left:auto">Weekly Sales · Live</span>
-  </div>
-
-  <div class="cgrid" style="grid-template-columns:1fr">
-    <div class="cc full">
-      <div class="ctitle">Weekly revenue per showroom (SEK) + all-time high</div>
-      <div class="cwrap" style="height:230px"><canvas id="cRevenue"></canvas></div>
-      <div class="chart-summary" id="sumRevenue"></div>
-    </div>
-  </div>
-  <div class="cgrid" style="grid-template-columns:1fr">
-    <div class="cc full">
-      <div class="ctitle">Orders placed during the week</div>
-      <div class="cwrap" style="height:230px"><canvas id="cOrders"></canvas></div>
-      <div class="chart-summary" id="sumOrders"></div>
-    </div>
-  </div>
-
-  <div class="cgrid">
-    <div class="cc full">
-      <div class="ctitle">On-spot rate during the week — ≥30% green · &lt;30% yellow</div>
-      <div class="cwrap" style="height:180px"><canvas id="cOnspot"></canvas></div>
-      <div class="chart-summary" id="sumOnspot"></div>
-    </div>
-  </div>
-
-  <div class="cgrid" style="grid-template-columns:1fr">
-    <div class="cc full">
-      <div class="ctitle">Meetings held during the week</div>
-      <div class="cwrap" style="height:230px"><canvas id="cMeetings"></canvas></div>
-      <div class="chart-summary" id="sumMeetings"></div>
-    </div>
-  </div>
-  <div class="cgrid" style="grid-template-columns:1fr">
-    <div class="cc full">
-      <div class="ctitle">Share of capacity booked</div>
-      <div class="cwrap" style="height:230px"><canvas id="cCapacity"></canvas></div>
-      <div class="chart-summary" id="sumCapacity"></div>
-    </div>
-  </div>
-
-  
-  <div id="showroomTexts" style="margin-top:8px"></div>
-</div>
-
-<!-- ══════════════════════════════════════
-     4 · DEVELOPMENT
-══════════════════════════════════════ -->
-<div class="sec" id="sec-development">
-  <div class="sec-head">
-    <div class="snum">4</div>
-    <h2>Development</h2>
-    
-  </div>
-  <div id="devSection"><div class="tcard"><div class="tf-val empty">Loading…</div></div></div>
-</div>
-
-<div style="font-size:10px;color:var(--text3);text-align:right;margin-top:24px;padding-top:10px;border-top:.5px solid var(--bdr)">
-  VANBRUUN · All Hands · Week data auto-refreshed from Google Sheets
-</div>
-
-<!-- ══════════════════════════════════════
-     5 · MARKETING
-══════════════════════════════════════ -->
-<div class="sec" id="sec-marketing">
-  <div class="sec-head">
-    <div class="snum">6</div>
-    <h2>Marketing</h2>
-    <span class="badge badge-s" style="margin-left:auto">Weekly Marketing · Live</span>
-  </div>
-  <div class="mkt-grid">
-    <div class="pc">
-      <div class="pl">Total COS</div>
-      <div class="pv" id="mktCos">—</div>
-      <div class="pyoy" id="mktCosNote" style="font-size:11px;color:var(--text3)"></div>
-    </div>
-    <div class="pc">
-      <div class="pl">Weekly ad spend</div>
-      <div class="pv" style="font-size:18px" id="mktSpend">—</div>
-      <div class="psub" id="mktSpendSub"></div>
-    </div>
-    <div class="pc">
-      <div class="pl">Incoming bookings</div>
-      <div class="pv" id="mktBookings">—</div>
-      <div class="psub" id="mktBookingsSub"></div>
-    </div>
-    <div class="pc">
-      <div class="pl">Ahrefs rank</div>
-      <div class="pv" id="mktAhrefs">—</div>
-      <div class="psub" id="mktAhrefsSub"></div>
-    </div>
-  </div>
-  <!-- Marketing KPI summary -->
-  <div id="mktKpiSummary" style="font-size:14px;color:#4E3227;line-height:1.75;padding:14px 0 20px;border-bottom:1px solid var(--bdr);margin-bottom:20px"></div>
-
-  <div id="mktSection"><div class="tcard"><div class="tf-val empty">Loading…</div></div></div>
-</div>
-
-<!-- ══════════════════════════════════════
-     6 · OUTBOUND
-══════════════════════════════════════ -->
-<div class="sec" id="sec-outbound">
-  <div class="sec-head">
-    <div class="snum">6</div>
-    <h2>Outbound</h2>
-    <span class="badge badge-s" style="margin-left:auto">Weekly Outbound · Live</span>
-  </div>
-
-  <!-- KPI cards -->
-  <div class="ob-kpi">
-    <div class="pc">
-      <div class="pl">🌍 Avg delivery days</div>
-      <div class="pv" id="obDelivery">—</div>
-      <div class="psub" id="obDeliverySub"></div>
-    </div>
-    <div class="pc">
-      <div class="pl">🌍 Quality return rate</div>
-      <div class="pv" id="obQuality">—</div>
-      <div class="psub" id="obQualitySub"></div>
-    </div>
-  </div>
-
-  <!-- Outbound KPI summary -->
-  <div id="obKpiSummary" style="font-size:14px;color:#4E3227;line-height:1.75;padding:14px 0 20px;border-bottom:1px solid var(--bdr);margin-bottom:20px"></div>
-
-  <!-- Charts: Global (SE + NO combined) — stacked full width -->
-  <div class="cgrid" style="grid-template-columns:1fr;margin-bottom:14px">
-    <div class="cc full">
-      <div class="ctitle">🌍 Size bands & size rings sent</div>
-      <div class="cwrap" style="height:220px"><canvas id="cObSizeRings"></canvas></div>
-      <div class="chart-summary" id="sumObSizeRings"></div>
-    </div>
-  </div>
-  <div class="cgrid" style="grid-template-columns:1fr;margin-bottom:14px">
-    <div class="cc full">
-      <div class="ctitle">🌍 Mock-up & proposal rings sent</div>
-      <div class="cwrap" style="height:220px"><canvas id="cObMockup"></canvas></div>
-      <div class="chart-summary" id="sumObMockup"></div>
-    </div>
-  </div>
-  <div class="cgrid" style="grid-template-columns:1fr;margin-bottom:14px">
-    <div class="cc full">
-      <div class="ctitle">🌍 Incoming repairs</div>
-      <div class="cwrap" style="height:180px"><canvas id="cObRepairs"></canvas></div>
-      <div class="chart-summary" id="sumObRepairs"></div>
-    </div>
-  </div>
-
-  
-  <div id="obSection"><div class="tcard"><div class="tf-val empty">Loading…</div></div></div>
-</div>
-
-<!-- ══════════════════════════════════════
-     7 · Q&A
-══════════════════════════════════════ -->
-<div class="sec" id="sec-qa" style="scroll-margin-top:56px;margin-top:36px">
-  <div class="sec-head">
-    <div class="snum">7</div>
-    <h2>Questions from the meeting</h2>
-    <span class="badge" style="margin-left:auto;background:rgba(228,221,215,.08);color:var(--text3)">Saved locally</span>
-  </div>
-  <div class="tcard">
-    <div style="display:flex;gap:8px;margin-bottom:14px">
-      <input id="qaInput" type="text" placeholder="Type a question raised during the meeting…"
-        style="flex:1;background:var(--bg3);border:.5px solid var(--bdr);border-radius:var(--rad);padding:8px 10px;font-size:13px;color:var(--text);font-family:inherit;outline:none"
-        onkeydown="if(event.key==='Enter')addQA()" onfocus="this.style.borderColor='var(--bdr2)'" onblur="this.style.borderColor='var(--bdr)'" />
-      <button onclick="addQA()" style="background:var(--c-show);color:var(--bg3);border:none;border-radius:var(--rad);padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Add</button>
-    </div>
-    <div id="qaList" style="display:flex;flex-direction:column;gap:6px"></div>
-    <div id="qaEmpty" style="font-size:12px;color:var(--text3);padding:4px 0">No questions added yet. Type above and press Enter or click Add.</div>
-  </div>
-</div>
-
-</div><!-- /wrap -->
-
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="closeLightbox()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out">
-  <img id="lightboxImg" style="max-width:90vw;max-height:90vh;border-radius:var(--rad-lg);box-shadow:0 20px 60px rgba(0,0,0,.6)" />
-</div>
-
-<script>
-// ═══════════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════════
-const APPS_URL = 'https://vanbruun-proxy.alexandra-489.workers.dev';
-
-// ═══════════════════════════════════════════════════════════════
-// DATE & WEEK
-// ═══════════════════════════════════════════════════════════════
-const now = new Date();
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const MONTH_ROW = { 0:2,1:3,2:4,3:5,4:6,5:7,6:8,7:9,8:10,9:11,10:12,11:13 }; // Jan=row2 … Dec=row13
-
-function getWeek(d) { d = d || new Date();
-  const dt = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  const day = dt.getUTCDay() || 7;
-  dt.setUTCDate(dt.getUTCDate() + 4 - day);
-  const y = new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
-  return Math.ceil((((dt - y) / 86400000) + 1) / 7);
-}
-
-document.getElementById('dateLbl').textContent =
-  now.toLocaleDateString('en-GB', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-document.getElementById('weekLbl').textContent =
-  'Week ' + getWeek(now) + ' · ' + MONTHS[now.getMonth()] + ' ' + now.getFullYear();
-
-// ═══════════════════════════════════════════════════════════════
-// FETCH FROM APPS SCRIPT
-// ═══════════════════════════════════════════════════════════════
-async function fetchSheet(action, params = {}) {
-  params._cb = Date.now();
-  const qs = new URLSearchParams({ action, ...params }).toString();
-  const url = `${APPS_URL}?${qs}`;
-  // Use no-cors mode if normal fetch fails (CORS issue with Apps Script)
-  try {
-    const res = await fetch(url, { redirect: 'follow' });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
-    return data;
-  } catch(e) {
-    // Try with mode: 'no-cors' as last resort (returns opaque response)
-    // Instead, surface the error clearly
-    throw new Error(`Fetch failed — check that Apps Script is deployed as "Anyone" and URL is correct. (${e.message})`);
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MAIN LOAD
-// ═══════════════════════════════════════════════════════════════
-async function loadAll() {
-  const btn = document.getElementById('refreshBtn');
-  btn.classList.add('spinning');
-  document.getElementById('loadOver').classList.remove('hidden');
-  document.getElementById('loadTxt').textContent = 'Fetching live data…';
-
-  // Load all sections with live data — no demo fallbacks
-  const sections = [
-    { fn: loadDashboard,        name: 'Dashboard KPIs'   },
-    { fn: loadWeeklySales,      name: 'Weekly Sales'      },
-    { fn: loadWeeklyMarketing,  name: 'Marketing'         },
-    { fn: loadWeeklyOutbound,   name: 'Outbound'          },
-  ];
-  for (const s of sections) {
-    try {
-      document.getElementById('loadTxt').textContent = 'Loading ' + s.name + '…';
-      await s.fn();
-    } catch (e) {
-      console.warn(s.name + ' failed:', e.message);
-    }
-  }
-  await loadTexts();
-  btn.classList.remove('spinning');
-  setTimeout(() => document.getElementById('loadOver').classList.add('hidden'), 300);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DASHBOARD — uses new Apps Script v2 response format
-// ═══════════════════════════════════════════════════════════════
-async function loadDashboard() {
-  document.getElementById('loadTxt').textContent = 'Loading Dashboard…';
-  const data = await fetchSheet('dashboard');
-  if (data.error) { console.warn('Dashboard error:', data.error); throw new Error(data.error); }
-  renderKPIs(data);
-  const markets = (data.markets || []).map(m => ({
-    name:   m.name,
-    pace:   m.paceRev,
-    orders: m.paceOrd != null ? Math.round(m.paceOrd) : null,
-    yoyRev: m.yoyRev,
-    yoyOrd: m.yoyOrd,
-  }));
-  renderMarketTable(markets);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// WEEKLY SALES — reads showroom chart data
-// ═══════════════════════════════════════════════════════════════
-async function loadWeeklySales() {
-  document.getElementById('loadTxt').textContent = 'Loading Weekly Sales…';
-  const data = await fetchSheet('weeklySales');
-  if (data.error) throw new Error(data.error);
-  if (data.showrooms && data.labels) {
-    // New format: pre-parsed showroom objects
-    renderAllCharts(data.labels, data.showrooms);
-  } else if (data.headers && data.rows) {
-    // Fallback: raw header/row format
-    const h = data.headers;
-    const rawRow = data.rows[data.rows.length - 1];
-    function fv(keyword) {
-      const i = h.findIndex(hd => String(hd).toLowerCase().includes(keyword.toLowerCase()));
-      return i >= 0 ? (parseFloat(rawRow[i]) || 0) : 0;
-    }
-    const labels = ['Stockholm','Gothenburg','Oslo','Copenhagen','Amsterdam','Paris','Sales Online'];
-    const showrooms = labels.map(name => ({
-      name, rev:0, ath:null, onspotOrders:0, otherOrders:0,
-      athOrders:null, bookedMtgs:0, dropinMtgs:0, athMtgs:null,
-      onspotRate:0, capacity:0
-    }));
-    renderAllCharts(labels, showrooms);
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════
-// DEMO DATA (fallback when sheet not reachable from browser)
-// ═══════════════════════════════════════════════════════════════
-function loadDemoKPIs() {
-  renderKPIs({
-    actualSales: 4024156, paceSales: 20791470,
-    orders26: 1235, yoyRev: -14.89, yoyOrd: -5.01,
-    target26: 34718294, sales25: 24430303, orders25: 1300
-  });
-  renderMarketTable([
-    { name:'All markets',     pace:20791470, orders:1235, yoyRev:-14.89, yoyOrd:-5.01  },
-    { name:'🇸🇪 Sweden',      pace:11854830, orders:708,  yoyRev:-23.24, yoyOrd:-13.57 },
-    { name:'🇳🇴 Norway',      pace:4701806,  orders:248,  yoyRev:-3.07,  yoyOrd:-0.80  },
-    { name:'🇩🇰 Denmark',     pace:2076783,  orders:124,  yoyRev:-31.81, yoyOrd:-30.34 },
-    { name:'🇳🇱 Netherlands', pace:1140120,  orders:72,   yoyRev:117.49, yoyOrd:158.33 },
-    { name:'🇫🇷 France',      pace:739442,   orders:47,   yoyRev:13.66,  yoyOrd:22.25  },
-  ]);
-}
-
-function loadDemoCharts() {
-  const labels = ['Stockholm','Gothenburg','Oslo','Copenhagen','Amsterdam','Paris','Sales Online'];
-  renderAllCharts(labels, [
-    { name:'Stockholm',   rev:1760000, ath:2920000, onspotOrders:62, otherOrders:25, athOrders:140, bookedMtgs:176, dropinMtgs:33, athMtgs:250, onspotRate:28.2, capacity:80.5 },
-    { name:'Gothenburg',  rev:165500,  ath:440000,  onspotOrders:7,  otherOrders:0,  athOrders:11,  bookedMtgs:0,   dropinMtgs:14, athMtgs:24,  onspotRate:0,    capacity:84.6 },
-    { name:'Oslo',        rev:712589,  ath:850000,  onspotOrders:0,  otherOrders:0,  athOrders:87,  bookedMtgs:0,   dropinMtgs:0,  athMtgs:76,  onspotRate:33.3, capacity:0.0  },
-    { name:'Copenhagen',  rev:481511,  ath:null,    onspotOrders:8,  otherOrders:38, athOrders:30,  bookedMtgs:37,  dropinMtgs:16, athMtgs:53,  onspotRate:33.9, capacity:42.3 },
-    { name:'Amsterdam',   rev:115012,  ath:201430,  onspotOrders:3,  otherOrders:20, athOrders:11,  bookedMtgs:6,   dropinMtgs:23, athMtgs:24,  onspotRate:19.4, capacity:21.5 },
-    { name:'Paris',       rev:null,    ath:null,    onspotOrders:2,  otherOrders:3,  athOrders:4,   bookedMtgs:13,  dropinMtgs:25, athMtgs:15,  onspotRate:31.0, capacity:8.6  },
-    { name:'Sales Online',rev:265490,  ath:344351,  onspotOrders:11, otherOrders:31, athOrders:0,   bookedMtgs:6,   dropinMtgs:6,  athMtgs:18,  onspotRate:0.0,  capacity:10.3 },
-  ]);
-}
-
-function loadDemo() { loadDemoKPIs(); loadDemoCharts(); }
-
-// ═══════════════════════════════════════════════════════════════
-// KPI CARDS
-// ═══════════════════════════════════════════════════════════════
-function fmtSek(n) {
-  if (n == null || isNaN(n)) return '—';
-  if (typeof n !== 'number') return '—';
-  return Math.round(n).toLocaleString('sv-SE') + ' sek';
-}
-
-function yoyClass(n) {
-  if (n == null || isNaN(n)) return '';
-  if (n < 0) return 'r';
-  if (n < 10) return 'y';
-  return 'g';
-}
-
-function yoyStr(n, isRaw) {
-  if (n == null || isNaN(n)) return '';
-  const pct = isRaw ? n : n; // already percent
-  return (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
-}
-
-function renderKPIs(d) {
-  // Support both field name variants from different script versions
-  const actualSales = d.actualSales != null ? d.actualSales : d.sales26;
-  const paceSales   = d.paceSales   != null ? d.paceSales   : d.sales26;
-  const orders26    = d.orders26;
-  const yoyRevPct   = d.yoyRev      != null ? d.yoyRev      : (d.yoyRevPct != null ? d.yoyRevPct : 0);
-  const yoyOrdPct   = d.yoyOrd      != null ? d.yoyOrd      : (d.yoyOrdPct != null ? d.yoyOrdPct : 0);
-  const target26    = d.target26;
-  const sales25     = d.sales25;
-  const orders25    = d.orders25;
-
-  // Revenue pace card — shows pace projection
-  document.getElementById('kRevPace').textContent = fmtSek(paceSales);
-  const revYoyEl = document.getElementById('kRevYoy');
-  revYoyEl.textContent = yoyStr(yoyRevPct);
-  revYoyEl.className = 'pyoy ' + yoyClass(yoyRevPct);
-  document.getElementById('kRevSub').textContent =
-    MONTHS[now.getMonth()] + ' · vs ' + fmtSek(sales25) + ' last year';
-
-  // Orders pace card
-  document.getElementById('kOrdPace').textContent =
-    orders26 != null ? Math.round(orders26).toLocaleString('sv-SE') : '—';
-  const ordYoyEl = document.getElementById('kOrdYoy');
-  ordYoyEl.textContent = yoyStr(yoyOrdPct);
-  ordYoyEl.className = 'pyoy ' + yoyClass(yoyOrdPct);
-  document.getElementById('kOrdSub').textContent =
-    'vs ' + (orders25 != null ? Math.round(orders25).toLocaleString('sv-SE') : '—') + ' orders last year';
-
-  // Target % card — uses ACTUAL sales (B88 from month sheet) vs target
-  const salesForTarget = actualSales != null ? actualSales : paceSales;
-  const pct = target26 > 0 ? (salesForTarget / target26 * 100) : 0;
-  document.getElementById('kTargetPct').textContent = pct.toFixed(1) + '%';
-  const barEl = document.getElementById('kTargetBar');
-  barEl.style.width = Math.min(pct, 100) + '%';
-  const cls = pct >= 90 ? 'g' : pct >= 70 ? 'y' : 'r';
-  barEl.className = 'pbar ' + cls;
-  document.getElementById('kTargetSub').textContent =
-    fmtSek(salesForTarget) + ' of ' + fmtSek(target26) + ' target';
-
-  // Generate AI summary for the 3 KPI cards
-  generateKPISummary({ paceSales, actualSales, target26, sales25, orders26, orders25, yoyRevPct, yoyOrdPct });
-}
-
-function generateKPISummary({ paceSales, actualSales, target26, sales25, orders26, orders25, yoyRevPct, yoyOrdPct }) {
-  const el = document.getElementById('kpiSummary');
-  if (!el) return;
-
-  const salesVal = actualSales || paceSales;
-  if (!salesVal || !target26) { el.textContent = ''; return; }
-
-  const month = now.toLocaleDateString('en-GB', { month: 'long' });
-  const targetPct = (salesVal / target26 * 100).toFixed(1);
-  const remaining = target26 - salesVal;
-
-  // Revenue sentence
-  const revDir = yoyRevPct < 0 ? 'down' : 'up';
-  const revAbs = Math.abs(yoyRevPct || 0).toFixed(1);
-  const revVsLY = sales25 ? ' compared to ' + fmtSek(sales25) + ' this time last year' : '';
-  const revSentence = `Revenue in ${month} is currently pacing at ${fmtSek(paceSales)}, ${revDir} ${revAbs}% year-on-year${revVsLY}.`;
-
-  // Orders sentence
-  const ordDir = (yoyOrdPct || 0) < 0 ? 'down' : 'up';
-  const ordAbs = Math.abs(yoyOrdPct || 0).toFixed(1);
-  const ordVsLY = orders25 ? ` versus ${Math.round(orders25)} orders last ${month}` : '';
-  const ordSentence = `Orders are tracking at ${Math.round(orders26 || 0)}${ordVsLY}, ${ordDir} ${ordAbs}% on last year.`;
-
-  // Target sentence
-  const targetStatus = targetPct >= 90 ? 'on track to hit' : targetPct >= 70 ? 'approaching' : 'behind pace toward';
-  const remainingText = remaining > 0 ? ` With ${fmtSek(remaining)} still to go, ` : ' ';
-  const targetSentence = `We have reached ${targetPct}% of the ${month} target of ${fmtSek(target26)}.${remainingText}${targetPct >= 90 ? 'the month is looking strong.' : targetPct >= 50 ? 'there is still ground to cover.' : 'a significant push is needed in the remaining days.'}`;
-
-  el.textContent = revSentence + ' ' + ordSentence + ' ' + targetSentence;
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MARKET TABLE
-// ═══════════════════════════════════════════════════════════════
-function yoyTd(val) {
-  if (val == null || val === '' || val === 'no y/y data') return `<td class="r" style="color:var(--text3)">—</td>`;
-  const raw = typeof val === 'number' ? val : parseFloat(String(val).replace('%','').replace('+',''));
-  const cls = isNaN(raw) ? '' : yoyClass(raw);
-  const clsMap = { g:'g', r:'r-c', y:'y', '':'' };
-  const display = typeof val === 'string' ? val : (raw >= 0 ? '+' : '') + raw.toFixed(2) + '%';
-  return `<td class="r ${clsMap[cls]}">${display}</td>`;
-}
-
-function renderMarketTable(markets) {
-  const isAll = (m) => m.name === 'All markets';
-  const tbody = document.getElementById('mktBody');
-  tbody.innerHTML = markets.map(m => `
-    <tr class="${isAll(m)?'tot':''}">
-      <td>${m.name}</td>
-      <td class="r">${typeof m.pace === 'number' ? fmtSek(m.pace) : (m.pace || '—')}</td>
-      <td class="r">${m.orders != null ? m.orders : '—'}</td>
-      ${yoyTd(m.yoyRev)}
-      ${yoyTd(m.yoyOrd)}
-    </tr>`).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// CHARTS
-// ═══════════════════════════════════════════════════════════════
-
-// Shared datalabels plugin — renders values on top of bars
-Chart.register({
-  id: 'vanbruunLabels',
-  afterDatasetsDraw(chart) {
-    const { ctx } = chart;
-    const isHoriz = chart.options.indexAxis === 'y';
-    chart.data.datasets.forEach((ds, di) => {
-      if (!ds._showLabels) return;
-      const meta = chart.getDatasetMeta(di);
-      meta.data.forEach((bar, i) => {
-        const val = ds.data[i];
-        const fmt = ds._labelFmt ? ds._labelFmt(val, i) : val;
-        if (!fmt && fmt !== 0) return;
-        if (String(fmt) === '0') return;
-        ctx.save();
-        ctx.font = '600 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
-        ctx.fillStyle = 'rgba(26,20,16,0.75)';
-        if (isHoriz) {
-          ctx.textAlign = 'left';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(fmt, bar.x + 6, bar.y);
-        } else {
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'bottom';
-          ctx.fillText(fmt, bar.x, bar.y - 3);
-        }
-        ctx.restore();
-      });
-    });
-  }
-});
-
-const TICK_COLOR = '#8A7A6A';
-const GRID_COLOR = 'rgba(26,20,16,.06)';
-const LEG = { color: '#4A3F35', font: { size: 10, family: "'DM Sans', sans-serif" }, boxWidth: 10, padding: 14 };
-
-const BASE_OPTS = (extra = {}) => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: { legend: { labels: LEG }, ...extra.plugins },
-  scales: {
-    x: { ticks: { color: TICK_COLOR, font: { size: 10 } }, grid: { color: GRID_COLOR }, ...extra.x },
-    y: { ticks: { color: TICK_COLOR, font: { size: 10 } }, grid: { color: GRID_COLOR }, ...extra.y },
-  },
-  ...extra.rest,
-});
-
-let CC = {};
-function dc(id) { if (CC[id]) { CC[id].destroy(); delete CC[id]; } }
-
-function fmtK(n) {
-  if (!n && n !== 0) return null;
-  if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
-  if (n >= 1000) return Math.round(n / 1000) + 'k';
-  return String(n);
-}
-
-
-// ═══════════════════════════════════════════════════════════════
-// CHART SUMMARIES — auto-generated from data
-// ═══════════════════════════════════════════════════════════════
-function setSummary(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-function fmt(n) {
-  if (!n) return '0';
-  if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-  if (n >= 1000) return Math.round(n/1000) + 'k';
-  return Math.round(n).toString();
-}
-
-function joinList(arr) {
-  if (arr.length === 0) return '';
-  if (arr.length === 1) return arr[0];
-  return arr.slice(0,-1).join(', ') + ' and ' + arr[arr.length-1];
-}
-
-function generateSummaries(labels, showrooms) {
-  // ── REVENUE ──
-  const revData = showrooms.map((s,i) => ({name:labels[i], rev:s.rev||0, ath:s.ath||0}));
-  const revSorted = [...revData].filter(s=>s.rev>0).sort((a,b)=>b.rev-a.rev);
-  if (revSorted.length > 0) {
-    const totalRev = revData.reduce((sum,s)=>sum+s.rev, 0);
-    // Full ranking sentence
-    const ranking = revSorted.map(s=>`${s.name} (${fmt(s.rev)} sek)`).join(', ');
-    const aboveATH = revData.filter(s=>s.rev>0&&s.ath>0&&s.rev>=s.ath).map(s=>s.name);
-    const belowATH = revData.filter(s=>s.rev>0&&s.ath>0&&s.rev<s.ath).sort((a,b)=>(b.rev/b.ath)-(a.rev/a.ath));
-    let txt = `Weekly revenue across all showrooms totalled ${fmt(totalRev)} sek. `;
-    txt += `Ranked by revenue: ${ranking}. `;
-    if (aboveATH.length > 0) txt += `${joinList(aboveATH)} reached or exceeded their all-time high. `;
-    if (belowATH.length > 0 && belowATH[0]) txt += `${belowATH[0].name} came closest to their ATH at ${Math.round(belowATH[0].rev/belowATH[0].ath*100)}%.`;
-    setSummary('sumRevenue', txt);
-  }
-
-  // ── ORDERS ──
-  const ordData = showrooms.map((s,i) => ({name:labels[i], total:(s.onspotOrders||0)+(s.otherOrders||0), onspot:s.onspotOrders||0}));
-  const ordSorted = [...ordData].filter(s=>s.total>0).sort((a,b)=>b.total-a.total);
-  if (ordSorted.length > 0) {
-    const totalAll = ordData.reduce((sum,s)=>sum+s.total, 0);
-    const totalOnspot = ordData.reduce((sum,s)=>sum+s.onspot, 0);
-    const overallRate = totalAll > 0 ? Math.round(totalOnspot/totalAll*100) : 0;
-    const ranking = ordSorted.map(s=>`${s.name} (${s.total})`).join(', ');
-    let txt = `A total of ${totalAll} orders were placed this week with an overall on-spot rate of ${overallRate}%. `;
-    txt += `Ranked by orders: ${ranking}.`;
-    setSummary('sumOrders', txt);
-  }
-
-  // ── ON-SPOT RATE ──
-  const spotData = showrooms.map((s,i) => ({name:labels[i], rate:s.onspotRate||0}));
-  const spotSorted = [...spotData].filter(s=>s.rate>0).sort((a,b)=>b.rate-a.rate);
-  if (spotSorted.length > 0) {
-    const aboveTarget = spotData.filter(s=>s.rate>=30).map(s=>s.name);
-    const belowTarget = spotData.filter(s=>s.rate>0&&s.rate<30).map(s=>s.name);
-    const ranking = spotSorted.map(s=>`${s.name} (${s.rate.toFixed(1)}%)`).join(', ');
-    let txt = `On-spot rates this week, ranked: ${ranking}. `;
-    if (aboveTarget.length > 0) txt += `${joinList(aboveTarget)} ${aboveTarget.length===1?'is':'are'} at or above the 30% target. `;
-    if (belowTarget.length > 0) txt += `${joinList(belowTarget)} ${belowTarget.length===1?'is':'are'} below the 30% target.`;
-    setSummary('sumOnspot', txt);
-  }
-
-  // ── MEETINGS ──
-  const mtgData = showrooms.map((s,i) => ({name:labels[i], total:(s.bookedMtgs||0)+(s.dropinMtgs||0), booked:s.bookedMtgs||0, dropin:s.dropinMtgs||0}));
-  const mtgSorted = [...mtgData].filter(s=>s.total>0).sort((a,b)=>b.total-a.total);
-  if (mtgSorted.length > 0) {
-    const totalMtg = mtgData.reduce((sum,s)=>sum+s.total, 0);
-    const totalDropin = mtgData.reduce((sum,s)=>sum+s.dropin, 0);
-    const dropinPct = totalMtg > 0 ? Math.round(totalDropin/totalMtg*100) : 0;
-    const ranking = mtgSorted.map(s=>`${s.name} (${s.total})`).join(', ');
-    let txt = `A total of ${totalMtg} meetings were held this week, of which ${dropinPct}% were drop-ins. `;
-    txt += `Ranked by meetings: ${ranking}.`;
-    setSummary('sumMeetings', txt);
-  }
-
-  // ── CAPACITY ──
-  const capData = showrooms.map((s,i) => ({name:labels[i], cap:s.capacity||0}));
-  const capSorted = [...capData].filter(s=>s.cap>0).sort((a,b)=>b.cap-a.cap);
-  if (capSorted.length > 0) {
-    const above75 = capData.filter(s=>s.cap>=75).map(s=>s.name);
-    const above50 = capData.filter(s=>s.cap>=50&&s.cap<75).map(s=>s.name);
-    const below50 = capData.filter(s=>s.cap>0&&s.cap<50).map(s=>s.name);
-    const ranking = capSorted.map(s=>`${s.name} (${s.cap.toFixed(1)}%)`).join(', ');
-    let txt = `Capacity booked, ranked: ${ranking}. `;
-    if (above75.length > 0) txt += `${joinList(above75)} ${above75.length===1?'is':'are'} above 75%. `;
-    if (above50.length > 0) txt += `${joinList(above50)} ${above50.length===1?'is':'are'} between 50–75%. `;
-    if (below50.length > 0) txt += `${joinList(below50)} ${below50.length===1?'is':'are'} below 50%.`;
-    setSummary('sumCapacity', txt);
-  }
-}
-
-function renderAllCharts(labels, showrooms) {
-  const rev        = showrooms.map(s => s.rev         || 0);
-  const ath        = showrooms.map(s => s.ath         || null);
-  const onspot     = showrooms.map(s => s.onspotOrders|| 0);
-  const other      = showrooms.map(s => s.otherOrders || 0);
-  const athOrd     = showrooms.map(s => s.athOrders   || null);
-  const booked     = showrooms.map(s => s.bookedMtgs  || 0);
-  const dropin     = showrooms.map(s => s.dropinMtgs  || 0);
-  const athMtg     = showrooms.map(s => s.athMtgs     || null);
-  const cap        = showrooms.map(s => s.capacity    || 0);
-  // onspotRate comes directly from the sheet (e.g. 28.2%), NOT calculated
-  const onspotRate = showrooms.map(s => s.onspotRate  || 0);
-
-  // ── 1. REVENUE — ATH left, Weekly Revenue right ──
-  dc('revenue');
-  CC.revenue = new Chart(document.getElementById('cRevenue').getContext('2d'), {
-    type: 'bar',
-    data: { labels, datasets: [
-      {
-        label: 'ATH',           // ATH first = left bar
-        data: ath,
-        backgroundColor: 'rgba(78,50,39,0.18)',
-        borderRadius: 4,
-        _showLabels: true,
-        _labelFmt: fmtK,
-      },
-      {
-        label: 'Weekly Revenue',
-        data: rev,
-        backgroundColor: '#4E3227',
-        borderRadius: 4,
-        _showLabels: true,
-        _labelFmt: fmtK,
-      },
-    ]},
-    options: BASE_OPTS({
-      y: { ticks: { color: TICK_COLOR, font: { size: 10 }, callback: n => fmtK(n) } },
-    }),
-  });
-
-  // ── 2. ORDERS — ATH (left stack), On spot + Other (right stack) ──
-  // Total label = on spot + other orders shown on top of right stack
-  dc('orders');
-  CC.orders = new Chart(document.getElementById('cOrders').getContext('2d'), {
-    type: 'bar',
-    data: { labels, datasets: [
-      {
-        label: 'ATH',
-        data: athOrd,
-        backgroundColor: 'rgba(78,50,39,0.18)',
-        borderRadius: 4,
-        stack: 'ath',
-        _showLabels: true,
-        _labelFmt: v => v > 0 ? v : null,
-      },
-      {
-        label: 'On spot',
-        data: onspot,
-        backgroundColor: '#213629',
-        borderRadius: 0,
-        stack: 'week',
-      },
-      {
-        label: 'Other orders',
-        data: other,
-        backgroundColor: '#4E3227',
-        borderRadius: [4, 4, 0, 0],
-        stack: 'week',
-        _showLabels: true,
-        // Total = on spot + other orders
-        _labelFmt: (v, i) => {
-          const total = (onspot[i] || 0) + (v || 0);
-          return total > 0 ? total : null;
-        },
-      },
-    ]},
-    options: BASE_OPTS(),
-  });
-
-  // ── 3. ON-SPOT RATE — from sheet directly, horizontal ──
-  dc('onspot');
-  CC.onspot = new Chart(document.getElementById('cOnspot').getContext('2d'), {
-    type: 'bar',
-    data: { labels, datasets: [{
-      label: 'On-spot rate %',
-      data: onspotRate,
-      backgroundColor: onspotRate.map(r =>
-        r >= 30 ? '#3d7a1a' : r > 0 ? '#b87a10' : 'rgba(228,221,215,0.08)'
-      ),
-      borderRadius: 4,
-      _showLabels: true,
-      _labelFmt: v => v > 0 ? v.toFixed(1) + '%' : null,
-    }]},
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: { ticks: { color: TICK_COLOR, font: { size: 10 }, callback: n => n + '%' }, grid: { color: GRID_COLOR }, max: 55 },
-        y: { ticks: { color: TICK_COLOR, font: { size: 10 } }, grid: { color: GRID_COLOR } },
-      },
-      plugins: { legend: { display: false } },
-    },
-  });
-
-  // ── 4. MEETINGS — ATH (left stack), Booked + Drop-ins (right stack) ──
-  // Total label = booked + drop-ins shown on top of right stack
-  dc('meetings');
-  CC.meetings = new Chart(document.getElementById('cMeetings').getContext('2d'), {
-    type: 'bar',
-    data: { labels, datasets: [
-      {
-        label: 'ATH',
-        data: athMtg,
-        backgroundColor: 'rgba(78,50,39,0.18)',
-        borderRadius: 4,
-        stack: 'ath',
-        _showLabels: true,
-        _labelFmt: v => v > 0 ? v : null,
-      },
-      {
-        label: 'Booked',
-        data: booked,
-        backgroundColor: '#4E3227',
-        borderRadius: 0,
-        stack: 'week',
-      },
-      {
-        label: 'Drop-ins',
-        data: dropin,
-        backgroundColor: '#213629',
-        borderRadius: [4, 4, 0, 0],
-        stack: 'week',
-        _showLabels: true,
-        // Total = booked + drop-ins
-        _labelFmt: (v, i) => {
-          const total = (booked[i] || 0) + (v || 0);
-          return total > 0 ? total : null;
-        },
-      },
-    ]},
-    options: BASE_OPTS(),
-  });
-
-  // ── 5. CAPACITY — from "% meetings held" in Weekly Sales, horizontal ──
-  dc('capacity');
-  CC.capacity = new Chart(document.getElementById('cCapacity').getContext('2d'), {
-    type: 'bar',
-    data: { labels, datasets: [{
-      label: 'Capacity booked %',
-      data: cap,
-      backgroundColor: cap.map(p =>
-        p >= 75 ? '#3d7a1a' :
-        p >= 50 ? '#5a9e3a' :
-        p >= 25 ? '#b87a10' :
-        p >  0  ? '#8a2520' :
-                  'rgba(228,221,215,0.07)'
-      ),
-      borderRadius: 4,
-      _showLabels: true,
-      _labelFmt: v => v > 0 ? v.toFixed(1) + '%' : null,
-    }]},
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: { ticks: { color: TICK_COLOR, font: { size: 10 }, callback: n => n + '%' }, grid: { color: GRID_COLOR }, max: 110 },
-        y: { ticks: { color: TICK_COLOR, font: { size: 10 } }, grid: { color: GRID_COLOR } },
-      },
-      plugins: { legend: { display: false } },
-    },
-  });
-
-  // Generate text summaries under each chart
-  generateSummaries(labels, showrooms);
-}
-
-// ═══════════════════════════════════════════════════════════════
-// ASANA TEXT (from localStorage — filled via input tool)
-// ═══════════════════════════════════════════════════════════════
-// ═══════════════════════════════════════════════════════════════
-// MARKETING KPIs
-// ═══════════════════════════════════════════════════════════════
-
-async function loadWeeklyMarketing() {
-  const data = await fetchSheet('weeklyMarketing');
-  if (data.error) throw new Error(data.error);
-  renderMarketingKPIs(data);
-}
-
-async function loadWeeklyOutbound() {
-  const data = await fetchSheet('weeklyOutbound');
-  if (data.error) throw new Error(data.error);
-  renderOutboundKPIs(data);
-  renderOutboundCharts(data);
-}
-function renderMarketingKPIs(d) {
-  function fmtSek2(n) { return n != null ? Math.round(n).toLocaleString('sv-SE') + ' sek' : '—'; }
-
-  // COS — this week + last week
-  const cos = d.cos;
-  const cosEl = document.getElementById('mktCos');
-  if (cosEl && cos != null) {
-    cosEl.textContent = cos.toFixed(2) + '%';
-    const cls = cos <= 20 ? 'g' : cos <= 25 ? 'y' : 'r';
-    cosEl.className = 'pv pyoy ' + cls;
-    cosEl.style.fontSize = '24px';
-  }
-  const cosNote = document.getElementById('mktCosNote');
-  if (cosNote) {
-    let note = '';
-    if (d.cosLastWeek != null) note = 'Last week: ' + d.cosLastWeek.toFixed(2) + '%';
-    cosNote.textContent = note;
-  }
-
-  // Ad Spend — this week + last week breakdown
-  const spendEl  = document.getElementById('mktSpend');
-  const spendSub = document.getElementById('mktSpendSub');
-  if (spendEl && d.totalSpend != null) {
-    spendEl.textContent = fmtSek2(d.totalSpend);
-    spendEl.style.fontSize = '18px';
-  }
-  if (spendSub) {
-    const lines = [];
-    if (d.metaSpend != null) lines.push('META: ' + fmtSek2(d.metaSpend) + ' · SEM: ' + fmtSek2(d.semSpend));
-    if (d.totalSpendPrev != null) lines.push('Last week: ' + fmtSek2(d.totalSpendPrev));
-    spendSub.innerHTML = lines.join('<br>');
-  }
-
-  // Bookings — this week + last week + ATH
-  const bkEl  = document.getElementById('mktBookings');
-  const bkSub = document.getElementById('mktBookingsSub');
-  if (bkEl  && d.bookings    != null) bkEl.textContent  = d.bookings;
-  if (bkSub) {
-    const lines = [];
-    if (d.bookingsPrev != null)  lines.push('Last week: ' + d.bookingsPrev);
-    if (d.athBookings  != null)  lines.push('ATH: ' + d.athBookings);
-    bkSub.innerHTML = lines.join('<br>');
-  }
-
-  // Ahrefs card display
-  const ahEl  = document.getElementById('mktAhrefs');
-  const ahSub = document.getElementById('mktAhrefsSub');
-  if (ahEl  && d.ahrefs    != null) ahEl.textContent  = '#' + d.ahrefs;
-  if (ahSub) ahSub.textContent = d.ahrefsATH != null ? 'ATH: #' + d.ahrefsATH : '';
-
-  // Ahrefs — lower = better rank, ATH = best rank ever
-  if (d.ahrefs != null) {
-    const ath = d.ahrefsATH;
-    const vsATH = ath != null
-      ? (d.ahrefs === ath ? ` This matches the all-time best of #${ath}.`
-        : d.ahrefs < ath  ? ` This is a new all-time best — previous ATH was #${ath}.`
-        : ` The all-time best ranking is #${ath}.`)
-      : '';
-    parts.push(`Ahrefs domain ranking is #${d.ahrefs}.${vsATH}`);
-  }
-
-  el.textContent = parts.join(' ');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// OUTBOUND KPIs & CHARTS
-// ═══════════════════════════════════════════════════════════════
-function renderOutboundKPIs(d) {
-  const delEl = document.getElementById('obDelivery');
-  const delSub = document.getElementById('obDeliverySub');
-  if (delEl && d.deliveryDays != null) delEl.textContent = d.deliveryDays + ' days';
-  if (delSub && d.deliveryATL != null) delSub.textContent = 'All time low: ' + d.deliveryATL + ' days';
-
-  const qualEl = document.getElementById('obQuality');
-  const qualSub = document.getElementById('obQualitySub');
-  if (qualEl && d.qualityReturnRate != null) qualEl.textContent = d.qualityReturnRate.toFixed(1) + '%';
-  if (qualSub && d.qualityATL != null) qualSub.textContent = 'All time low: ' + d.qualityATL + '%';
-
-  // AI summary for the two KPI cards
-  generateObKpiSummary(d);
-}
-
-function generateObKpiSummary(d) {
-  const el = document.getElementById('obKpiSummary');
-  if (!el) return;
-
-  const parts = [];
-
-  // Delivery days
-  if (d.deliveryDays != null) {
-    const atl = d.deliveryATL;
-    const dayWord = d.deliveryDays === 1 ? 'day' : 'days';
-    const atlText = atl != null
-      ? (d.deliveryDays <= atl
-          ? ` — matching the all-time low of ${atl} days`
-          : ` compared to an all-time low of ${atl} days`)
-      : '';
-    parts.push(`Average delivery time is currently ${d.deliveryDays} ${dayWord}${atlText}.`);
-  }
-
-  // Quality return rate
-  if (d.qualityReturnRate != null) {
-    const atl = d.qualityATL;
-    const isGood = atl != null ? d.qualityReturnRate <= atl * 1.2 : d.qualityReturnRate < 2;
-    const atlText = atl != null
-      ? ` The all-time low is ${atl.toFixed(1)}%.`
-      : '';
-    const status = d.qualityReturnRate < 1.5
-      ? 'an excellent quality return rate'
-      : d.qualityReturnRate < 3
-      ? 'a solid quality return rate'
-      : 'a quality return rate that warrants attention';
-    parts.push(`Outbound is reporting ${status} of ${d.qualityReturnRate.toFixed(1)}%.${atlText}`);
-  }
-
-  el.textContent = parts.join(' ');
-}
-
-function renderOutboundCharts(d) {
-  const weeks    = d.weeks || [];
-  const athColor = 'rgba(78,50,39,0.18)';
-  const darkGreen = '#213629';
-  const darkBrown = '#4E3227';
-
-  // Combine SE + NO by adding values together
-  function combine(seArr, noArr) {
-    const se = seArr || [];
-    const no = noArr || [];
-    const len = Math.max(se.length, no.length);
-    return Array.from({length: len}, (_, i) => (se[i]||0) + (no[i]||0));
-  }
-  function combineATH(seArr, noArr) {
-    const se = seArr || [];
-    const no = noArr || [];
-    const len = Math.max(se.length, no.length);
-    return Array.from({length: len}, (_, i) => {
-      const sv = se[i], nv = no[i];
-      if (sv == null && nv == null) return null;
-      return (sv||0) + (nv||0);
-    });
-  }
-
-  const size_bands  = combine(d.se_size_bands,  d.no_size_bands);
-  const size_rings  = combine(d.se_size_rings,  d.no_size_rings);
-  const mockups     = combine(d.se_mockups,     d.no_mockups);
-  const proposals   = combine(d.se_proposals,   d.no_proposals);
-  const repairs     = combine(d.se_repairs,     d.no_repairs);
-  const ath_size    = combineATH(d.se_ath_size, d.no_ath_size);
-  const ath_mock    = combineATH(d.se_ath_mock, d.no_ath_mock);
-  const ath_repairs = combineATH(d.se_ath_repairs, d.no_ath_repairs);
-
-  function barChart(canvasId, labels, datasets, stacked) {
-    dc(canvasId);
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    CC[canvasId] = new Chart(canvas.getContext('2d'), {
-      type: 'bar',
-      data: { labels, datasets },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { labels: LEG } },
-        scales: {
-          x: { ticks:{color:TICK_COLOR,font:{size:10}}, grid:{color:GRID_COLOR}, stacked: !!stacked },
-          y: { ticks:{color:TICK_COLOR,font:{size:10}}, grid:{color:GRID_COLOR}, stacked: !!stacked },
-        }
-      }
-    });
-  }
-
-  // Size rings + bands (combined SE+NO)
-  barChart('cObSizeRings', weeks, [
-    { label:'ATH', data: ath_size, backgroundColor: athColor, borderRadius:3, stack:'ath' },
-    { label:'Size bands sent', data: size_bands, backgroundColor: darkGreen, borderRadius:0, stack:'w',
-      _showLabels:true, _labelFmt:v=>v>0?v:null },
-    { label:'Size rings sent', data: size_rings, backgroundColor: darkBrown, borderRadius:[4,4,0,0], stack:'w',
-      _showLabels:true, _labelFmt:(v,i)=>{ const t=size_bands[i]||0; return (t+v)>0?t+v:null; } },
-  ], true);
-
-  // Mockup + proposal (combined)
-  barChart('cObMockup', weeks, [
-    { label:'ATH', data: ath_mock, backgroundColor: athColor, borderRadius:3, stack:'ath' },
-    { label:'Proposal rings sent', data: proposals, backgroundColor: darkBrown, borderRadius:0, stack:'w' },
-    { label:'Mock-up rings sent', data: mockups, backgroundColor: darkGreen, borderRadius:[4,4,0,0], stack:'w',
-      _showLabels:true, _labelFmt:(v,i)=>{ const t=proposals[i]||0; return (t+v)>0?t+v:null; } },
-  ], true);
-
-  // Repairs (combined)
-  barChart('cObRepairs', weeks, [
-    { label:'ATH repairs received', data: ath_repairs, backgroundColor: athColor, borderRadius:3 },
-    { label:'Repairs received', data: repairs, backgroundColor: darkBrown, borderRadius:3,
-      _showLabels:true, _labelFmt:v=>v>0?v:null },
-  ], false);
-
-  generateOutboundSummaries(weeks, d, { size_bands, size_rings, mockups, proposals, repairs, ath_size, ath_mock, ath_repairs });
-}
-
-
-function generateOutboundSummaries(weeks, d, combined) {
-  if (!weeks || !weeks.length) return;
-  const last = weeks.length - 1;
-  const prev = last > 0 ? last - 1 : 0;
-  const latestWeek = weeks[last];
-  const prevWeek   = weeks[prev];
-  const { size_bands, size_rings, mockups, proposals, repairs, ath_size, ath_repairs } = combined;
-
-  // Size rings + bands summary
-  const totalSize  = (size_bands[last]||0) + (size_rings[last]||0);
-  const totalSizeP = (size_bands[prev]||0) + (size_rings[prev]||0);
-  const athSizeV   = ath_size ? ath_size[last] : null;
-  const sizePct    = athSizeV > 0 ? Math.round(totalSize / athSizeV * 100) : null;
-  const sizeTrend  = totalSize > totalSizeP ? `up from ${totalSizeP} in ${prevWeek}` : totalSize < totalSizeP ? `down from ${totalSizeP} in ${prevWeek}` : `unchanged from ${prevWeek}`;
-  setSummary('sumObSizeRings', `A total of ${totalSize} rings were sent globally in ${latestWeek} (${size_bands[last]||0} size bands + ${size_rings[last]||0} size rings), ${sizeTrend}.${sizePct != null ? ` This represents ${sizePct}% of the all-time high (${athSizeV}).` : ''}`);
-
-  // Mockup + proposal summary
-  const totalMock  = (mockups[last]||0) + (proposals[last]||0);
-  const totalMockP = (mockups[prev]||0) + (proposals[prev]||0);
-  const mockTrend  = totalMock > totalMockP ? `up from ${totalMockP}` : totalMock < totalMockP ? `down from ${totalMockP}` : `unchanged`;
-  setSummary('sumObMockup', `${totalMock} rings were sent globally in ${latestWeek} (${mockups[last]||0} mock-ups + ${proposals[last]||0} proposals), ${mockTrend} in ${prevWeek}.`);
-
-  // Repairs summary
-  const repV   = repairs[last]||0;
-  const repP   = repairs[prev]||0;
-  const athRep = ath_repairs ? ath_repairs[last] : null;
-  const repTrend = repV > repP ? `up from ${repP}` : repV < repP ? `down from ${repP}` : `unchanged`;
-  setSummary('sumObRepairs', `${repV} repairs were received globally in ${latestWeek}, ${repTrend} in ${prevWeek}.${athRep ? ` The all-time high is ${athRep}.` : ''}`);
-}
-
-
-// Demo outbound data
-function loadDemoOutbound() {
-  const weeks = ['W9','W10','W11','W12'];
-  renderOutboundKPIs({ deliveryDays:14, deliveryATL:7, qualityReturnRate:2.7, qualityATL:1.6 });
-  renderOutboundCharts({
-    weeks,
-    se_ath_size:    [234,234,234,234], se_size_bands:  [96,47,98,61],  se_size_rings: [12,17,13,6],
-    se_ath_mock:    [81,81,81,81],     se_mockups:     [31,40,28,30],  se_proposals:  [7,6,13,11],
-    se_ath_repairs: [157,157,157,157], se_repairs:     [72,102,63,116],
-    no_ath_size:    [87,87,87,87],     no_size_bands:  [11,20,0,17],   no_size_rings: [0,4,9,0],
-    no_ath_mock:    [29,29,29,29],     no_mockups:     [1,2,3,4],      no_proposals:  [1,4,5,4],
-    no_ath_repairs: [41,41,41,41],     no_repairs:     [28,24,24,26],
-  });
-}
-
-
-function parseImgs(val) {
-  if (!val) return [];
-  if (Array.isArray(val)) return val;
-  try { return JSON.parse(val) || []; } catch(e) { return []; }
-}
-async function loadTexts() {
-  try {
-    const d2 = new Date(); const week = 'W' + getWeek(d2) + '_' + d2.getFullYear();
-    const res  = await fetch(`${APPS_URL}?action=getTexts&week=${week}`);
-    const json = await res.json();
-    if (json.error) throw new Error(json.error);
-    // Store in memory and render
-    window._sharedTexts = json.data || {};
-  } catch(err) {
-    console.warn('Could not load shared texts:', err.message);
-    const local = JSON.parse(localStorage.getItem('vb_asana_data') || '{}');
-    window._sharedTexts = local.flat || local;
-  }
-
-  // Images are stored as JSON strings in the shared texts (Drive URLs)
-  // Parse them from _sharedTexts
-  function parseImgKey(key) {
-    try {
-      const val = window._sharedTexts[key];
-      return val ? JSON.parse(val) : [];
-    } catch(e) { return []; }
-  }
-  window._sharedImages = {
-    ceo: parseImgKey('ceo_images'),
-    mkt: parseImgKey('mkt_images'),
-    bd:  parseImgKey('bd_images'),
-    pd:  parseImgKey('pd_images'),
-  };
-
-  renderAsana();
-}
-
-function renderAsana() {
-  const flat = window._sharedTexts || {};
-  // Convert flat keys to nested structure for compatibility
-  const d = {
-    ceo_note: flat.ceo_note,
-    ceo_org:  flat.ceo_org,
-    showrooms: {
-      stockholm:  { moment:flat.sr_stockholm_moment,  learnings:flat.sr_stockholm_learnings,  actions:flat.sr_stockholm_actions,  whatsup:flat.sr_stockholm_whatsup  },
-      oslo:       { moment:flat.sr_oslo_moment,        learnings:flat.sr_oslo_learnings,        actions:flat.sr_oslo_actions,        whatsup:flat.sr_oslo_whatsup        },
-      copenhagen: { moment:flat.sr_copenhagen_moment,  learnings:flat.sr_copenhagen_learnings,  actions:flat.sr_copenhagen_actions,  whatsup:flat.sr_copenhagen_whatsup  },
-      amsterdam:  { moment:flat.sr_amsterdam_moment,   learnings:flat.sr_amsterdam_learnings,   actions:flat.sr_amsterdam_actions,   whatsup:flat.sr_amsterdam_whatsup   },
-      paris:      { moment:flat.sr_paris_moment,        learnings:flat.sr_paris_learnings,        actions:flat.sr_paris_actions,        whatsup:flat.sr_paris_whatsup        },
-      gothenburg: { moment:flat.sr_gothenburg_moment,  learnings:flat.sr_gothenburg_learnings,  actions:flat.sr_gothenburg_actions,  whatsup:flat.sr_gothenburg_whatsup  },
-    },
-    marketing: { focus:flat.mkt_focus, media:flat.mkt_media, actions:flat.mkt_actions },
-    outbound:  { se_learnings:flat.ob_learnings, se_actions:flat.ob_actions, se_whatsup:flat.ob_whatsup },
-    development: { bd_status:flat.bd_status, bd_next:flat.bd_next, pd_news:flat.pd_news, pd_learning:flat.pd_learning, pd_actions:flat.pd_actions },
-  };
-
-  // CEO
-  document.getElementById('ceoNote').textContent =
-    d.ceo_note || 'No CEO note yet — use the Input Tool to add content.';
-  if (d.ceo_org) {
-    document.getElementById('ceoOrgCard').style.display = 'block';
-    document.getElementById('ceoOrg').textContent = d.ceo_org;
-  }
-  // CEO images from localStorage
-  const si = window._sharedImages || {};
-  if (si.ceo && si.ceo.length) {
-    const ceoImgDiv = document.getElementById('ceoImagesDisplay');
-    if (ceoImgDiv) { ceoImgDiv.innerHTML = renderImgGrid(si.ceo); setTimeout(makeImagesClickable, 100); }
-  }
-
-  // Showrooms
-  const srOrder = [
-    { k:'stockholm',  l:'Stockholm 🇸🇪'  },
-    { k:'oslo',       l:'Oslo 🇳🇴'       },
-    { k:'copenhagen', l:'Copenhagen 🇩🇰' },
-    { k:'amsterdam',  l:'Amsterdam 🇳🇱'  },
-    { k:'paris',      l:'Paris 🇫🇷'      },
-    { k:'gothenburg', l:'Gothenburg 🇸🇪' },
-  ];
-  document.getElementById('showroomTexts').innerHTML = srOrder.map(sr => {
-    const sd = d.showrooms?.[sr.k] || {};
-    return `<div class="tcard">
-      <div class="tc-title">${sr.l}</div>
-      ${tf('Moment of the week', sd.moment)}
-      ${tf('Learnings', sd.learnings)}
-      ${tf('Actions', sd.actions)}
-      ${tf("What's up?", sd.whatsup)}
-    </div>`;
-  }).join('');
-
-  // Marketing
-  const mk = d.marketing || {};
-  const mktImgs = (si.mkt && si.mkt.length) ? si.mkt : [];
-  document.getElementById('mktSection').innerHTML = `<div class="tcard">
-    ${tf('Campaign focus', mk.focus || d.mkt_focus)}
-    ${tf('Media highlights', mk.media || d.mkt_media)}
-    ${tf("Actions / What's up?", mk.actions || d.mkt_actions)}
-    ${mktImgs.length ? imgGrid(mktImgs) : ''}
-  </div>`;
-
-  // Outbound — single text block
-  const ob = d.outbound || {};
-  const obLearnings = d.ob_learnings || ob.se_learnings || ob.no_learnings;
-  const obActions   = d.ob_actions   || ob.se_actions   || ob.no_actions;
-  const obWhatsup   = d.ob_whatsup   || ob.se_whatsup   || ob.no_whatsup;
-  document.getElementById('obSection').innerHTML = `
-    <div class="tcard">
-      ${tf('Learnings', obLearnings)}
-      ${tf('Actions', obActions)}
-      ${tf("What's up?", obWhatsup)}
-    </div>`;
-
-  // Marketing image upload area (init after text renders)
-  setTimeout(() => { initMktImageUpload(); makeImagesClickable(); }, 200);
-
-  // Development
-  const dev = d.development || {};
-  document.getElementById('devSection').innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div class="tcard">
-        <div class="tc-title">Business Development</div>
-    ${tf('Status of ongoing projects', dev.bd_status)}
-        ${tf("What's coming up?", dev.bd_next)}
-        ${imgGrid(dev.bd_images)}
+<!-- PHASES -->
+<div class="section">
+  <div class="section-label">Onboarding</div>
+  <div class="section-title">Four Weeks in June · 15 Minutes per Week</div>
+  <div class="phases">
+
+    <div class="phase">
+      <div class="phase-left">
+        <div class="phase-week">Week 1</div>
+        <div class="phase-dates">June 1–7</div>
+        <div class="phase-name">What is<br>Claude?</div>
+        <div class="phase-vid-label">📖 This week</div>
+        <a class="phase-vid-link" href="https://anthropic.skilljar.com/claude-101" target="_blank">
+          <span class="play-icon">→</span>
+          <span>Anthropic Academy: Claude 101<br><span style="opacity:0.6;font-size:9px">anthropic.skilljar.com/claude-101</span></span>
+        </a>
       </div>
-      <div class="tcard">
-        <div class="tc-title">Product Development</div>
-        ${tf('Product news', dev.pd_news)}
-        ${tf('Inspiration / Learning', dev.pd_learning)}
-        ${tf('Actions', dev.pd_actions)}
-        ${imgGrid(dev.pd_images)}
+      <div class="phase-mid">
+        <div class="phase-topic">Learn</div>
+        <ul class="phase-list">
+          <li>What is an LLM and why is Claude different?</li>
+          <li>Claude.ai — chat, Projects, Memory</li>
+          <li>How to prompt effectively (clarity, context, format)</li>
+          <li>AI as a colleague, not a search engine</li>
+        </ul>
+        <div class="time-badge">⏱ ~15 min · Anthropic Academy · Free</div>
       </div>
-    </div>`;
-}
-
-function tf(label, val) {
-  return `<div class="tf">
-    <div class="tf-lbl">${label}</div>
-    <div class="tf-val ${val ? '' : 'empty'}">${val ? esc(val) : 'Not filled in yet'}</div>
-  </div>`;
-}
-
-function renderImgGrid(imgs) {
-  if (!imgs || !imgs.length) return '';
-  return imgs.map(img => `<div>
-    <img src="${img.src}" style="width:100%;border-radius:6px;border:1px solid var(--bdr);cursor:zoom-in" onclick="openLightbox('${img.src}')"/>
-    ${img.caption ? `<div style="font-size:10px;color:var(--text3);margin-top:3px">${esc(img.caption)}</div>` : ''}
-  </div>`).join('');
-}
-
-function imgGrid(imgs) {
-  if (!imgs || !imgs.length) return '';
-  return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--bdr)">
-    ${renderImgGrid(imgs)}
-  </div>`;
-}
-
-function esc(s) {
-  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ═══════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════
-window.addEventListener('DOMContentLoaded', () => {
-  loadAll();
-  loadQA();
-  setTimeout(makeImagesClickable, 1000);
-});
-
-// ═══════════════════════════════════════════════════════════════
-// SAVE THIS WEEK AS PDF
-// Uses html2canvas to capture the live dark-themed page,
-// then jsPDF to assemble into a multi-page PDF
-// ═══════════════════════════════════════════════════════════════
-async function saveWeekPDF() {
-  const btn = document.getElementById('savePdfBtn');
-  btn.classList.add('saving');
-  btn.textContent = '⏳ Generating…';
-
-  try {
-    const { jsPDF } = window.jspdf;
-    const wrap = document.querySelector('.wrap');
-
-    // Temporarily hide interactive elements
-    document.body.classList.add('pdf-mode');
-
-    // Small delay so CSS applies
-    await new Promise(r => setTimeout(r, 100));
-
-    // Capture full page
-    const canvas = await html2canvas(wrap, {
-      backgroundColor: '#FAFAF8',   // --bg
-      scale: 2,                      // retina quality
-      useCORS: true,
-      allowTaint: true,
-      logging: false,
-      windowWidth: wrap.scrollWidth,
-      scrollY: 0,
-    });
-
-    document.body.classList.remove('pdf-mode');
-
-    // PDF setup — A4 landscape for best fit
-    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const pageW = pdf.internal.pageSize.getWidth();
-    const pageH = pdf.internal.pageSize.getHeight();
-
-    const imgW = canvas.width;
-    const imgH = canvas.height;
-    const ratio = pageW / (imgW / 2); // /2 because scale:2
-    const totalH = (imgH / 2) * ratio;
-
-    // Split into pages
-    const pageHeightPx = (pageH / ratio) * 2; // canvas px per page
-    let offsetY = 0;
-    let page = 0;
-
-    while (offsetY < imgH) {
-      if (page > 0) pdf.addPage();
-
-      // Crop a slice of the canvas
-      const sliceH = Math.min(pageHeightPx, imgH - offsetY);
-      const sliceCanvas = document.createElement('canvas');
-      sliceCanvas.width = imgW;
-      sliceCanvas.height = sliceH;
-      const ctx = sliceCanvas.getContext('2d');
-      // Fill with bg color so no white gaps
-      ctx.fillStyle = '#FAFAF8';
-      ctx.fillRect(0, 0, imgW, sliceH);
-      ctx.drawImage(canvas, 0, offsetY, imgW, sliceH, 0, 0, imgW, sliceH);
-
-      const imgData = sliceCanvas.toDataURL('image/jpeg', 0.95);
-      const sliceHmm = (sliceH / 2) * ratio;
-      pdf.addImage(imgData, 'JPEG', 0, 0, pageW, sliceHmm);
-
-      offsetY += pageHeightPx;
-      page++;
-    }
-
-    // File name: "Week 20 · 2026.pdf"
-    const weekNum = getWeek(new Date());
-    const year = new Date().getFullYear();
-    pdf.save(`Week ${weekNum} · ${year}.pdf`);
-
-  } catch(err) {
-    console.error('PDF error:', err);
-    alert('Could not generate PDF: ' + err.message);
-    document.body.classList.remove('pdf-mode');
-  }
-
-  btn.classList.remove('saving');
-  btn.textContent = '⬇ Save this week';
-}
-
-// ═══════════════════════════════════════════════════════════════
-// LIGHTBOX
-// ═══════════════════════════════════════════════════════════════
-function openLightbox(src) {
-  const lb = document.getElementById('lightbox');
-  document.getElementById('lightboxImg').src = src;
-  lb.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-// Make all report images clickable for lightbox
-function makeImagesClickable() {
-  document.querySelectorAll('.tcard img, .preview-img-item img, .img-card img').forEach(img => {
-    if (!img.dataset.lightbox) {
-      img.dataset.lightbox = '1';
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', e => { e.stopPropagation(); openLightbox(img.src); });
-    }
-  });
-}
-
-// ═══════════════════════════════════════════════════════════════
-// Q&A — Meeting questions (saved in localStorage per week)
-// ═══════════════════════════════════════════════════════════════
-function qaKey() {
-  return 'vb_qa_w' + getWeek(new Date()) + '_' + new Date().getFullYear();
-}
-function loadQA() {
-  const questions = JSON.parse(localStorage.getItem(qaKey()) || '[]');
-  renderQA(questions);
-}
-function addQA() {
-  const input = document.getElementById('qaInput');
-  const text = input.value.trim();
-  if (!text) return;
-  const questions = JSON.parse(localStorage.getItem(qaKey()) || '[]');
-  questions.push({ text, time: new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' }) });
-  localStorage.setItem(qaKey(), JSON.stringify(questions));
-  input.value = '';
-  renderQA(questions);
-}
-function removeQA(idx) {
-  const questions = JSON.parse(localStorage.getItem(qaKey()) || '[]');
-  questions.splice(idx, 1);
-  localStorage.setItem(qaKey(), JSON.stringify(questions));
-  renderQA(questions);
-}
-function renderQA(questions) {
-  const list = document.getElementById('qaList');
-  const empty = document.getElementById('qaEmpty');
-  if (!list) return;
-  if (questions.length === 0) {
-    list.innerHTML = '';
-    if (empty) empty.style.display = 'block';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-  list.innerHTML = questions.map((q, i) => `
-    <div style="background:var(--bg2);border-radius:var(--rad);border:1px solid var(--bdr);overflow:hidden;margin-bottom:6px">
-      <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 16px">
-        <span style="font-size:12px;color:var(--text3);white-space:nowrap;margin-top:1px;font-weight:600">${i+1}.</span>
-        <span style="flex:1;font-size:14px;color:#4E3227;line-height:1.5;font-weight:500">${esc(q.text)}</span>
-        <span style="font-size:10px;color:var(--text3);white-space:nowrap;margin-top:3px;text-transform:uppercase;letter-spacing:.04em">${q.time||''}</span>
-        <button onclick="removeQA(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0;line-height:1;flex-shrink:0" title="Remove">×</button>
+      <div class="phase-right">
+        <div class="phase-topic">Exercise</div>
+        <ul class="phase-list">
+          <li>Use Claude for one real work problem this week</li>
+          <li>Draft a customer email, analyse a number, structure a plan</li>
+          <li>Share one sentence with your team: what worked?</li>
+        </ul>
       </div>
-      <div style="border-top:1px solid var(--bdr);padding:10px 16px 10px 38px;display:flex;gap:10px;align-items:flex-start;background:var(--bg)">
-        <span style="font-size:11px;color:var(--text3);margin-top:3px;white-space:nowrap;text-transform:uppercase;letter-spacing:.04em">Answer</span>
-        ${q.answer
-          ? `<span style="font-size:13px;color:#4E3227;flex:1;line-height:1.6">${esc(q.answer)}</span>
-             <button onclick="editAnswer(${i})" style="background:none;border:1px solid var(--bdr);border-radius:3px;color:var(--text3);cursor:pointer;font-size:10px;padding:2px 8px;text-transform:uppercase;letter-spacing:.04em">Edit</button>`
-          : `<input type="text" placeholder="Type answer and press Enter…" onkeydown="if(event.key==='Enter')saveAnswer(${i},this.value)"
-              style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--bdr2);color:#4E3227;font-size:13px;padding:2px 0;font-family:inherit;outline:none"
-              onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--bdr2)'" />`
-        }
+    </div>
+
+    <div class="phase">
+      <div class="phase-left">
+        <div class="phase-week">Week 2</div>
+        <div class="phase-dates">June 8–14</div>
+        <div class="phase-name">Claude<br>Cowork</div>
+        <div class="phase-vid-label">📖 This week</div>
+        <a class="phase-vid-link" href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank">
+          <span class="play-icon">→</span>
+          <span>Anthropic Academy: Introduction to Claude Cowork<br><span style="opacity:0.6;font-size:9px">anthropic.skilljar.com/introduction-to-claude-cowork</span></span>
+        </a>
       </div>
-    </div>`).join('');
-}
+      <div class="phase-mid">
+        <div class="phase-topic">Learn</div>
+        <ul class="phase-list">
+          <li>Cowork — desktop tool, no code required</li>
+          <li>Files, folders and task management via AI</li>
+          <li>Build workflows that run on their own</li>
+          <li>Connect to Google Drive, email, documents</li>
+        </ul>
+        <div class="time-badge">⏱ ~15 min · Anthropic Academy · Free</div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-topic">Exercise</div>
+        <ul class="phase-list">
+          <li>Automate one repetitive task you do every week</li>
+          <li>E.g. sort inbox, summarise reports, move files</li>
+          <li>Document time saved — share with your manager</li>
+        </ul>
+      </div>
+    </div>
 
-function saveAnswer(idx, answer) {
-  if (!answer.trim()) return;
-  const questions = JSON.parse(localStorage.getItem(qaKey()) || '[]');
-  if (questions[idx]) { questions[idx].answer = answer.trim(); }
-  localStorage.setItem(qaKey(), JSON.stringify(questions));
-  renderQA(questions);
-}
+    <div class="phase">
+      <div class="phase-left">
+        <div class="phase-week">Week 3</div>
+        <div class="phase-dates">June 15–21</div>
+        <div class="phase-name">Claude<br>Agents</div>
+        <div class="phase-vid-label">📖 This week</div>
+        <a class="phase-vid-link" href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank">
+          <span class="play-icon">→</span>
+          <span>Anthropic Academy: Introduction to MCP<br><span style="opacity:0.6;font-size:9px">anthropic.skilljar.com/introduction-to-model-context-protocol</span></span>
+        </a>
+      </div>
+      <div class="phase-mid">
+        <div class="phase-topic">Learn</div>
+        <ul class="phase-list">
+          <li>What is an AI agent — different from a single prompt</li>
+          <li>Agents that execute multiple steps autonomously</li>
+          <li>MCP: HubSpot, Asana, Gmail, Calendar connections</li>
+          <li>Security — what an agent should never do alone</li>
+        </ul>
+        <div class="time-badge">⏱ ~15 min · Anthropic Academy · Free</div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-topic">Exercise</div>
+        <ul class="phase-list">
+          <li>Build a simple agent for your role (with guidance)</li>
+          <li>E.g. fetch open HubSpot deals and summarise status</li>
+          <li>Present to your team on Friday — even if simple</li>
+        </ul>
+      </div>
+    </div>
 
-function editAnswer(idx) {
-  const questions = JSON.parse(localStorage.getItem(qaKey()) || '[]');
-  if (questions[idx]) { questions[idx].answer = null; }
-  localStorage.setItem(qaKey(), JSON.stringify(questions));
-  renderQA(questions);
-}
+    <div class="phase">
+      <div class="phase-left">
+        <div class="phase-week">Week 4</div>
+        <div class="phase-dates">June 22–28</div>
+        <div class="phase-name">Claude<br>Code</div>
+        <div class="phase-vid-label">📖 This week</div>
+        <a class="phase-vid-link" href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank">
+          <span class="play-icon">→</span>
+          <span>Anthropic Academy: Claude Code in Action<br><span style="opacity:0.6;font-size:9px">anthropic.skilljar.com/claude-code-in-action</span></span>
+        </a>
+      </div>
+      <div class="phase-mid">
+        <div class="phase-topic">Learn</div>
+        <ul class="phase-list">
+          <li>Claude Code — AI coding assistant, terminal-based</li>
+          <li>You do NOT need to code — Claude writes it for you</li>
+          <li>Build scripts, analysis tools, automations</li>
+          <li>Code vs Cowork vs Agents — when to use which</li>
+        </ul>
+        <div class="time-badge">⏱ ~15 min · Anthropic Academy · Free</div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-topic">Exercise + Deadlines</div>
+        <ul class="phase-list">
+          <li>Install Claude Code and run your first task</li>
+          <li><strong>June 25:</strong> Submit 2–3 project ideas to manager</li>
+          <li><strong>June 28:</strong> Q3 OKR submitted and confirmed</li>
+        </ul>
+      </div>
+    </div>
 
-// ═══════════════════════════════════════════════════════════════
-// MARKETING IMAGE UPLOAD (stored in localStorage)
-// ═══════════════════════════════════════════════════════════════
-const mktImgs = [];
-function initMktImageUpload() { /* Images moved to input tool */ }
-function handleMktDrop(e) {}
-function handleMktFiles(e) {}
-function processMktFiles(files) {}
-function renderMktImgGrid() {}
+  </div>
+</div>
 
-// ═══════════════════════════════════════════════════════════════
-// PDF — Save this week
-// ═══════════════════════════════════════════════════════════════
-</script>
+<!-- PROJECT IDEAS -->
+<div class="section">
+  <div class="section-label">Inspiration</div>
+  <div class="section-title">Project Ideas — Submit Yours by June 25</div>
+  <div style="background:white;padding:28px 32px;margin-bottom:32px;border-left:3px solid var(--gold)">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:10px">What to submit</div>
+    <div style="font-size:13px;color:var(--text-muted);line-height:1.7">Submit 2–3 ideas to your manager by June 25. For each: describe the problem, which tool you'd use (Cowork / Agents / Code), and how you'd measure success. One idea will be confirmed as your Q3 project.</div>
+  </div>
+  <div class="projects">
+    <div class="project-card"><div class="proj-num">01</div><div><div class="proj-title">Automated Customer Email Handling</div><div class="proj-dept">Sales · All Showrooms</div><div class="proj-desc">Claude reads incoming emails, categorises them and drafts replies. SA approves with one click.</div></div></div>
+    <div class="project-card"><div class="proj-num">02</div><div><div class="proj-title">Diamond Benchmark Tool</div><div class="proj-dept">Product · Purchasing</div><div class="proj-desc">Scan competitor price lists automatically and flag discrepancies each week.</div></div></div>
+    <div class="project-card"><div class="proj-num">03</div><div><div class="proj-title">Daily Pipeline Report</div><div class="proj-dept">Sales · Operations</div><div class="proj-desc">Agent fetches open HubSpot deals each morning and sends a Slack summary to managers.</div></div></div>
+    <div class="project-card"><div class="proj-num">04</div><div><div class="proj-title">Sample Sorter</div><div class="proj-dept">Warehouse · Ops</div><div class="proj-desc">Photograph samples — Claude identifies, updates stock and creates goods receipt automatically.</div></div></div>
+    <div class="project-card"><div class="proj-num">05</div><div><div class="proj-title">New SA Onboarding Guide</div><div class="proj-dept">HR · All Markets</div><div class="proj-desc">Interactive Q&amp;A guide for new hires, based on VANBRUUN products and customer scenarios.</div></div></div>
+    <div class="project-card"><div class="proj-num">06</div><div><div class="proj-title">Monthly Adyen / Klarna Analysis</div><div class="proj-dept">Finance · Operations</div><div class="proj-desc">Script converts exports to SEK, compares against prior month and generates a PDF recap.</div></div></div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section">
+  <div class="section-label">The Toolbox</div>
+  <div class="section-title">Three Ways to Use Claude</div>
+  <div class="tools">
+    <div class="tool"><div class="tool-icon">🖥️</div><div class="tool-name">Claude Cowork</div><div class="tool-tag">For Everyone · No Code</div><div class="tool-desc">Desktop tool for automating files and tasks. No code required.</div><div class="tool-ex-label">Best for</div><ul class="tool-ex"><li>Sorting and drafting emails automatically</li><li>Summarising weekly reports</li><li>Creating presentations from data</li><li>Moving and naming files</li></ul></div>
+    <div class="tool"><div class="tool-icon">🤖</div><div class="tool-name">Claude Agents</div><div class="tool-tag">For Everyone · With Guidance</div><div class="tool-desc">Connects HubSpot, Asana, Gmail, Calendar. The agent works — you approve.</div><div class="tool-ex-label">Best for</div><ul class="tool-ex"><li>Pipeline updates from HubSpot</li><li>Automated customer follow-ups</li><li>OKR status reports every Monday</li><li>Booking meetings based on conditions</li></ul></div>
+    <div class="tool"><div class="tool-icon">⌨️</div><div class="tool-name">Claude Code</div><div class="tool-tag">For the Curious · AI Writes the Code</div><div class="tool-desc">Describe what you want. Claude writes the script.</div><div class="tool-ex-label">Best for</div><ul class="tool-ex"><li>Analysing Adyen / Klarna data</li><li>Building price monitoring tools</li><li>Scraping competitor data</li><li>Generating sales reports in seconds</li></ul></div>
+  </div>
+</div>
+
+<!-- OKR -->
+<div class="section">
+  <div class="section-label">OKR Guide</div>
+  <div class="section-title">What Makes a Great Key Result?</div>
+  <div class="okr-grid">
+    <div class="okr-box do"><div class="okr-head">✓ Do This</div><ul class="okr-list"><li>Specific and measurable — clear pass or fail</li><li>Numbers or yes/no — no vague language</li><li>Ambitious but realistic — a real stretch goal</li><li>Tied directly to the Objective</li><li>Time-bound within Q3</li></ul></div>
+    <div class="okr-box dont"><div class="okr-head">✕ Avoid</div><ul class="okr-list"><li>Tasks written as KRs ("have a meeting")</li><li>Vague outcomes ("improve", "work on")</li><li>More than 3–5 KRs per Objective</li><li>Vanity metrics that don't move the company forward</li></ul></div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer-brand">Vanbruun · Q3 2026</div>
+  <div class="footer-note">Internal document · Not for distribution</div>
+</div>
+
 </body>
 </html>
